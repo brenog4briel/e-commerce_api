@@ -19,6 +19,8 @@ model Usuario{
   CEP String
   lista_de_desejo Lista_de_desejo? 
   pedido_de_compra Pedido_de_compra[]
+
+  @@map("usuarios")
 }
 
 model Lista_de_desejo {
@@ -26,6 +28,8 @@ model Lista_de_desejo {
   usuario Usuario @relation(fields: [usuario_id],references: [usuario_id])
   usuario_id Int @unique
   produto Produto[]
+
+  @@map("lista de desejo")
 }
 
 model Produto {
@@ -38,6 +42,8 @@ model Produto {
   lista_de_desejo_usuario_id Int
   pedido_de_compra Pedido_de_compra @relation(fields: [pedido_de_compra_id],references: [pedido_de_compra_id])
   pedido_de_compra_id Int
+
+  @@map("produtos")
 }
 
 model Pedido_de_compra {
@@ -47,5 +53,7 @@ model Pedido_de_compra {
   data DateTime
   numero String
   produto Produto[]
+
+  @@map("pedido de compra")
 
 }
