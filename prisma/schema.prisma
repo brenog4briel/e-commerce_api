@@ -1,0 +1,51 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Usuario{
+  usuario_id Int @id @default(autoincrement())
+  nome String
+  senha String
+  email String
+  endereco String
+  CEP String
+  lista_de_desejo Lista_de_desejo? 
+  pedido_de_compra Pedido_de_compra[]
+}
+
+model Lista_de_desejo {
+  lista_de_desejos_id Int @id @default(autoincrement())
+  usuario Usuario @relation(fields: [usuario_id],references: [usuario_id])
+  usuario_id Int @unique
+  produto Produto[]
+}
+
+model Produto {
+  produto_id Int @id @unique @default(autoincrement())
+  nome String
+  preco Float
+  proprietario String
+  qtd_estoque Int
+  lista_de_desejo_usuario Lista_de_desejo @relation(fields: [lista_de_desejo_usuario_id],references: [lista_de_desejos_id])
+  lista_de_desejo_usuario_id Int
+  pedido_de_compra Pedido_de_compra @relation(fields: [pedido_de_compra_id],references: [pedido_de_compra_id])
+  pedido_de_compra_id Int
+}
+
+model Pedido_de_compra {
+  pedido_de_compra_id Int @id
+  usuario Usuario @relation(fields: [usuario_id],references: [usuario_id])
+  usuario_id Int @unique
+  data DateTime
+  numero String
+  produto Produto[]
+
+}
