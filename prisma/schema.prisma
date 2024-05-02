@@ -11,7 +11,7 @@ datasource db {
 }
 
 model Usuario {
-  id Int @id @default(autoincrement())
+  usuario_id Int @id @default(autoincrement())
   nome String
   senha String
   email String
@@ -20,11 +20,30 @@ model Usuario {
   criadoEm DateTime @default(now())
   atualizadoEm DateTime @updatedAt
 
+  produto Usuario_tem_produto[]
   lista_de_desejos Lista_de_desejos?
   pedido_de_compra Pedido_de_compra[]
-
-  @@map("usuarios")
 }
+
+
+model Lista_de_desejos {
+  preco_acumulado Float
+
+  usuario Usuario @relation(fields: [usuario_id],references: [usuario_id])
+  usuario_id Int @unique
+
+  produto Lista_de_desejos_tem_produto[]
+}
+
+model Lista_de_desejos_tem_produto{
+  lista_de_desejos Lista_de_desejos @relation(fields: [lista_de_desejos_id],references: [usuario_id])
+  lista_de_desejos_id Int
+  produto Produto @relation(fields: [produto_id],references: [produto_id])
+  produto_id Int
+
+  @@id([lista_de_desejos_id,produto_id])
+}
+
 
 model Pedido_de_compra {
   data DateTime @default(now())
@@ -34,25 +53,26 @@ model Pedido_de_compra {
   CEP String
   desconto Float
 
-  usuario Usuario @relation(fields: [usuario_id],references: [id])
+  usuario Usuario @relation(fields: [usuario_id],references: [usuario_id])
   usuario_id Int @unique
 
   produto Pedido_de_compra_tem_produto[]
-  
 }
 
-model Lista_de_desejos {
-  preco_acumulado Float
+model Pedido_de_compra_tem_produto{
+  pedido_de_compra Pedido_de_compra @relation(fields: [pedido_de_compra_id],references: [usuario_id])
+  pedido_de_compra_id Int
+  produto Produto @relation(fields: [produto_id],references: [produto_id])
+  produto_id Int
 
-  usuario Usuario @relation(fields: [usuario_id],references: [id])
-  usuario_id Int @unique
-
-  produto Lista_de_desejos_tem_produto[]
+ @@id([pedido_de_compra_id,produto_id])
 
 }
+
+
 
 model Produto {
-  id Int @id @default(autoincrement())
+  produto_id Int @id @default(autoincrement())
   nome String
   preco Float
   proprietario String
@@ -60,24 +80,17 @@ model Produto {
   criadoEm DateTime @default(now())
   atualizadoEm DateTime @updatedAt
 
+  usuario Usuario_tem_produto[]
   pedido_de_compra Pedido_de_compra_tem_produto[]
   lista_de_desejos Lista_de_desejos_tem_produto[]
 }
 
-model Pedido_de_compra_tem_produto {
-  produto Produto @relation(fields: [produto_id], references: [id])
-  produto_id Int 
-  pedido_de_compra Pedido_de_compra @relation(fields: [pedido_de_compra_id], references: [usuario_id])
-  pedido_de_compra_id Int 
+model Usuario_tem_produto {
+  usuario Usuario @relation(fields: [usuario_id],references: [usuario_id])
+  usuario_id Int
 
-  @@id([produto_id, pedido_de_compra_id])
-}
+  produto Produto @relation(fields: [produto_id],references: [produto_id])
+  produto_id Int
 
-model Lista_de_desejos_tem_produto {
-  produto Produto @relation(fields: [produto_id], references: [id])
-  produto_id Int 
-  lista_de_desejos Lista_de_desejos @relation(fields: [lista_de_desejos_id], references: [usuario_id])
-  lista_de_desejos_id Int 
-
-  @@id([produto_id, lista_de_desejos_id])
+  @@id([usuario_id,produto_id])
 }
