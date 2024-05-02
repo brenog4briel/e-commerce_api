@@ -19,4 +19,5 @@ export interface CriacaoUsuario {
 
 export interface UsuarioRepository {
     create(data:CriacaoUsuario): Promise<Usuario>
+    findOne(email:string): Promise<Usuario | null>
 }
