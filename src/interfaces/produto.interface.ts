@@ -2,9 +2,18 @@ export interface Produto {
   nome: string
   preco: number
   proprietario: string
-  qtd_estoque: number
+  qtd_estoque: number;
+  criadoEm: Date;
+  atualizadoEm: Date;
+}
+
+export interface CriacaoProduto {
+  nome: string
+  preco: number
+  proprietario: string
+  qtd_estoque: number;
 }
 
 export interface ProdutoRepository {
-    create(data:Produto): Promise<Produto>
+    create(data:CriacaoProduto): Promise<Produto>
 }

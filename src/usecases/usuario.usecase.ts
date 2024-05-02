@@ -1,4 +1,4 @@
-import { Usuario, UsuarioRepository } from "../interfaces/usuario.interface";
+import { CriacaoUsuario, Usuario, UsuarioRepository } from "../interfaces/usuario.interface";
 import { UsuarioRepositoryPrisma } from "../repository/usuario.repository";
 
 class UsuarioUseCase {
@@ -7,7 +7,7 @@ class UsuarioUseCase {
         this.usuarioRepository = new UsuarioRepositoryPrisma();
     }
 
-    async create({ nome, senha, email, endereco, CEP }: Usuario): Promise<Usuario> {
+    async create({ nome, senha, email, endereco, CEP }: CriacaoUsuario): Promise<Usuario> {
         const result = await this.usuarioRepository.create({ nome, senha, email, endereco, CEP });
         return result;
     }

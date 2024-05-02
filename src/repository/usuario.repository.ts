@@ -1,8 +1,8 @@
 import { prisma } from "../database/prisma-client";
-import { Usuario, UsuarioRepository } from "../interfaces/usuario.interface";
+import { CriacaoUsuario, Usuario, UsuarioRepository } from "../interfaces/usuario.interface";
 
 class UsuarioRepositoryPrisma implements UsuarioRepository {
-    async create(data: Usuario): Promise<Usuario> {
+    async create(data: CriacaoUsuario): Promise<Usuario> {
         const result = await prisma.usuario.create({
             data: {
                 nome: data.nome,

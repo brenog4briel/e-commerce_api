@@ -1,4 +1,4 @@
-import { Produto,ProdutoRepository } from "../interfaces/produto.interface";
+import { CriacaoProduto, Produto,ProdutoRepository } from "../interfaces/produto.interface";
 import { ProdutoRepositoryPrisma } from "../repository/produto.repository";
 
 class ProdutoUseCase {
@@ -7,7 +7,7 @@ class ProdutoUseCase {
         this.produtoRepository = new ProdutoRepositoryPrisma()
     }
 
-    async create({nome,preco,proprietario,qtd_estoque}:Produto) : Promise<Produto> {
+    async create({nome,preco,proprietario,qtd_estoque}:CriacaoProduto) : Promise<Produto> {
         const result = await this.produtoRepository.create({nome,preco,proprietario,qtd_estoque});
         return result;
     }
