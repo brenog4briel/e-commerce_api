@@ -1,4 +1,5 @@
 export interface Produto {
+  produto_id: number
   nome: string
   preco: number
   proprietario: string
@@ -16,4 +17,5 @@ export interface CriacaoProduto {
 
 export interface ProdutoRepository {
     create(data:CriacaoProduto): Promise<Produto>
+    update({nome,preco,proprietario,qtd_estoque}:CriacaoProduto) : Promise<CriacaoProduto | null>
 }
