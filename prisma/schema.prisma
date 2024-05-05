@@ -20,7 +20,7 @@ model Usuario {
   criadoEm DateTime @default(now())
   atualizadoEm DateTime @updatedAt
 
-  produto Usuario_tem_produto[]
+  produto Produto[]
   lista_de_desejos Lista_de_desejos?
   pedido_de_compra Pedido_de_compra[]
 }
@@ -80,17 +80,9 @@ model Produto {
   criadoEm DateTime @default(now())
   atualizadoEm DateTime @updatedAt
 
-  usuario Usuario_tem_produto[]
+  usuario Usuario @relation(fields: [usuario_id],references: [usuario_id])
+  usuario_id Int 
   pedido_de_compra Pedido_de_compra_tem_produto[]
   lista_de_desejos Lista_de_desejos_tem_produto[]
 }
 
-model Usuario_tem_produto {
-  usuario Usuario @relation(fields: [usuario_id],references: [usuario_id])
-  usuario_id Int
-
-  produto Produto @relation(fields: [produto_id],references: [produto_id])
-  produto_id Int
-
-  @@id([usuario_id,produto_id])
-}

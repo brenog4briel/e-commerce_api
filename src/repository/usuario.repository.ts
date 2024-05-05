@@ -26,6 +26,15 @@ class UsuarioRepositoryPrisma implements UsuarioRepository {
         })
         return result || null;
     }
+
+    async findEmailById(usuario_id: number): Promise<string | null> {
+        const result = await prisma.usuario.findFirst({
+            where:{
+                usuario_id
+            }
+        })
+        return result?.email || null
+    }
 }
 
 export {UsuarioRepositoryPrisma}
