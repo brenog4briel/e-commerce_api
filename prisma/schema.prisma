@@ -11,7 +11,7 @@ datasource db {
 }
 
 model Usuario {
-  usuario_id Int @id @default(autoincrement())
+  usuario_id String @id @default(uuid())
   nome String
   senha String
   email String
@@ -30,16 +30,16 @@ model Lista_de_desejos {
   preco_acumulado Float
 
   usuario Usuario @relation(fields: [usuario_id],references: [usuario_id])
-  usuario_id Int @unique
+  usuario_id String @unique
 
   produto Lista_de_desejos_tem_produto[]
 }
 
 model Lista_de_desejos_tem_produto{
   lista_de_desejos Lista_de_desejos @relation(fields: [lista_de_desejos_id],references: [usuario_id])
-  lista_de_desejos_id Int
+  lista_de_desejos_id String
   produto Produto @relation(fields: [produto_id],references: [produto_id])
-  produto_id Int
+  produto_id String
 
   @@id([lista_de_desejos_id,produto_id])
 }
@@ -54,16 +54,16 @@ model Pedido_de_compra {
   desconto Float
 
   usuario Usuario @relation(fields: [usuario_id],references: [usuario_id])
-  usuario_id Int @unique
+  usuario_id String @unique
 
   produto Pedido_de_compra_tem_produto[]
 }
 
 model Pedido_de_compra_tem_produto{
   pedido_de_compra Pedido_de_compra @relation(fields: [pedido_de_compra_id],references: [usuario_id])
-  pedido_de_compra_id Int
+  pedido_de_compra_id String
   produto Produto @relation(fields: [produto_id],references: [produto_id])
-  produto_id Int
+  produto_id String
 
  @@id([pedido_de_compra_id,produto_id])
 
@@ -72,7 +72,7 @@ model Pedido_de_compra_tem_produto{
 
 
 model Produto {
-  produto_id Int @id @default(autoincrement())
+  produto_id String @id @default(uuid())
   nome String
   preco Float
   proprietario String
@@ -81,7 +81,7 @@ model Produto {
   atualizadoEm DateTime @updatedAt
 
   usuario Usuario @relation(fields: [usuario_id],references: [usuario_id])
-  usuario_id Int 
+  usuario_id String 
   pedido_de_compra Pedido_de_compra_tem_produto[]
   lista_de_desejos Lista_de_desejos_tem_produto[]
 }

@@ -1,5 +1,5 @@
 export interface Usuario {
-    usuario_id: number;
+    usuario_id: string;
     nome: string;
     senha: string;
     email: string;
@@ -20,5 +20,5 @@ export interface CriacaoUsuario {
 export interface UsuarioRepository {
     create(data: CriacaoUsuario): Promise<Usuario>
     findOne(email:string): Promise<Usuario | null>
-    findEmailById(usuario_id:number | undefined): Promise<string | null>
+    findEmailById(usuario_id:string | undefined): Promise<string | null>
 }

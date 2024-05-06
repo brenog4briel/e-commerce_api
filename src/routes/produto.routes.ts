@@ -21,9 +21,8 @@ export async function ProdutoRoutes(fastify: FastifyInstance) {
         }
     })
     
-    fastify.put<{Body: {nome:string,preco:number,proprietario:string,qtd_estoque:number}; Params:{produto_id:number}}>('/:id',async(req,reply) => {
-        const {produto_id} = req.params;
-        console.log(produto_id)
+    fastify.put<{Body: {nome:string,preco:number,proprietario:string,qtd_estoque:number}; Params:{produto_id:string}}>('/:produto_id',async(req,reply) => {
+        const produto_id = req.params.produto_id;
         const {nome,preco,proprietario,qtd_estoque} = req.body;
 
         try {
@@ -34,8 +33,9 @@ export async function ProdutoRoutes(fastify: FastifyInstance) {
         }
     })
 
-    fastify.delete<{Params:{produto_id:number}}>("/:id",async(req,reply) => {
+    fastify.delete<{Params:{produto_id:string}}>("/:produto_id",async(req,reply) => {
         const {produto_id} = req.params;
+        console.log(produto_id)
         try {
             const result = await produtoUseCase.delete(produto_id);
             return reply.send(result);

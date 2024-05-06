@@ -13,7 +13,7 @@ class ProdutoUseCase {
         return result;
     }
 
-    async update({produto_id,nome,preco,proprietario,qtd_estoque}:Produto) : Promise<Produto> {
+    async update({produto_id,nome,preco,proprietario,qtd_estoque}:Produto){
 
         const result = await this.produtoRepository.update({
             produto_id,
@@ -25,7 +25,7 @@ class ProdutoUseCase {
         return result;
     }
 
-    async delete(produto_id:number) : Promise<boolean>{
+    async delete(produto_id:string) : Promise<boolean>{
         const result = await this.produtoRepository.delete(produto_id);
         return result;
     }

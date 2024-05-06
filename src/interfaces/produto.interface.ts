@@ -1,12 +1,12 @@
 export interface Produto {
-    produto_id: number;
+    produto_id: string;
     nome: string;
     preco: number;
     proprietario: string;
     qtd_estoque: number;
     criadoEm?: Date;
     atualizadoEm?: Date;
-    usuario_id?: number;
+    usuario_id?: string;
 }
 
 export interface CriacaoProduto {
@@ -14,7 +14,7 @@ export interface CriacaoProduto {
     preco: number;
     proprietario: string;
     qtd_estoque: number;
-    usuario_id: number;
+    usuario_id: string;
 }
 
 export interface ProdutoRepository {
@@ -22,5 +22,5 @@ export interface ProdutoRepository {
     update({produto_id,nome,preco,proprietario,qtd_estoque}:Produto): Promise<Produto>
     findAll(proprietario:string): Promise<Produto[] | null>;
     findOne(nome:string,proprietario:string): Promise<Produto | null>
-    delete(produto_id:number): Promise<boolean>
+    delete(produto_id:string): Promise<boolean>
 }

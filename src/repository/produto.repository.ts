@@ -23,16 +23,16 @@ class ProdutoRepositoryPrisma implements ProdutoRepository {
                 produto_id,
             },
             data: {
-                nome: nome,
-                preco: preco,
-                proprietario: proprietario,
-                qtd_estoque: qtd_estoque
+                nome,
+                preco,
+                proprietario,
+                qtd_estoque
             }
         })
         return result;
     }
 
-    async delete( produto_id : number): Promise<boolean> {
+    async delete( produto_id : string): Promise<boolean> {
         const result = await prisma.produto.delete({
             where:{
                 produto_id

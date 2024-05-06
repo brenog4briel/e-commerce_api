@@ -1,5 +1,5 @@
 export interface Pedido_de_compra {
-    usuario_id: number;
+    usuario_id: string;
     data: Date;
     numero: string;
     total_a_pagar: number;
