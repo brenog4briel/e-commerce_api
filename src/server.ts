@@ -1,7 +1,6 @@
 import fastify, { FastifyInstance } from "fastify";
 import { UsuarioRoutes } from "./routes/usuario.routes";
 import { ProdutoRoutes } from "./routes/produto.routes";
-// import { produtoRoutes } from "./routes/produto.routes";
 
 const app: FastifyInstance = fastify();
 
