@@ -1,4 +1,4 @@
-import { Usuario, UsuarioRepository } from "../interfaces/usuario.interface";
+import { Usuario, UsuarioData, UsuarioRepository } from "../interfaces/usuario.interface";
 import { UsuarioRepositoryPrisma } from "../repository/usuario.repository";
 
 class UsuarioUseCase {
@@ -7,16 +7,15 @@ class UsuarioUseCase {
         this.usuarioRepository = new UsuarioRepositoryPrisma()
     }
 
-    async create({nome,email,senha,endereco,CEP}:Usuario): Promise<Usuario> {
-
+    async create({nome,email,senha,CEP,endereco,lista_de_desejos,pedido_de_compra,produtos}:UsuarioData): Promise<Usuario> {
         const usuarioExiste = await this.usuarioRepository.findByEmail(email);
         if (usuarioExiste) {throw new Error("Usuário já cadastrado!")}
 
-        const result = await this.usuarioRepository.create({nome,senha,email,endereco,CEP});
+        const result = await this.usuarioRepository.create({nome,email,senha,CEP,endereco,lista_de_desejos,pedido_de_compra,produtos});
         return result;
     }
 
-    async updateUserInfo({usuario_id, nome, endereco, CEP }: Usuario): Promise<Usuario> {
+    async updateUserInfo(usuario_id:string,nome:string,endereco:string,CEP:string): Promise<Usuario> {
         const result = await this.usuarioRepository.updateUserInfo(usuario_id, nome, endereco, CEP );
         return result;
 

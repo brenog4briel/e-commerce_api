@@ -27,12 +27,14 @@ model Usuario {
 
 
 model Lista_de_desejos {
+  lista_de_desejos_id String @default(uuid()) @id
   preco_acumulado Float
   usuario Usuario @relation(fields: [usuario_id],references: [usuario_id])
-  usuario_id String @unique @id
+  usuario_id String @unique
   produtos Produto[]
 }
 model Pedido_de_compra {
+  pedido_de_compra_id String @default(uuid()) @id
   data DateTime @default(now())
   numero String
   total_a_pagar Float
@@ -41,7 +43,7 @@ model Pedido_de_compra {
   desconto Float
 
   usuario Usuario @relation(fields: [usuario_id],references: [usuario_id])
-  usuario_id String @unique @id
+  usuario_id String @unique 
 
   produtos Produto[]
 }
@@ -57,8 +59,8 @@ model Produto {
 
   usuario Usuario @relation(fields: [usuario_id],references: [usuario_id])
   usuario_id String 
-  pedido_de_compra Pedido_de_compra @relation(fields: [pedido_de_compra_id],references: [usuario_id])
-  pedido_de_compra_id String
-  lista_de_desejos Lista_de_desejos @relation(fields: [lista_de_desejos_id],references: [usuario_id])
-  lista_de_desejos_id String @unique
+  pedido_de_compra Pedido_de_compra? @relation(fields: [pedido_de_compra_id],references: [pedido_de_compra_id])
+  pedido_de_compra_id String? 
+  lista_de_desejos Lista_de_desejos? @relation(fields: [lista_de_desejos_id],references: [lista_de_desejos_id])
+  lista_de_desejos_id String? 
 }

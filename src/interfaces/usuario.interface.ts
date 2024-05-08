@@ -1,6 +1,6 @@
 import { Lista_de_desejos } from "./lista_de_desejos.interface";
 import { Pedido_de_compra } from "./pedido_de_compra.interface";
-import {Produto} from "./produto.interface"
+import {Produto, ProdutoData} from "./produto.interface"
 
 export interface Usuario {
     usuario_id: string;
@@ -22,9 +22,9 @@ export interface UsuarioData {
     email: string;
     endereco: string;
     CEP: string;
-    produtos?: Produto[];
-    lista_de_desejos?: Lista_de_desejos;
-    pedido_de_compra?: Pedido_de_compra[];
+    produtos: ProdutoData[];
+    pedido_de_compra: Pedido_de_compra[];
+    lista_de_desejos: Lista_de_desejos;
 }
 
 export interface UsuarioRepository {
@@ -32,5 +32,5 @@ export interface UsuarioRepository {
     findByEmail(email:string): Promise<Usuario | null>
     findEmailById(usuario_id:string | undefined): Promise<string | null>
     updateUserInfo(usuario_id:string,nome:string,endereco:string,CEP:string) : Promise<Usuario>;
-    updateUserProducts(usuario: Usuario, produto:Produto) : Promise<Usuario>;
+    updateUserProducts({nome,preco,proprietario,qtd_estoque,usuario_id,pedido_de_compra_id,lista_de_desejos_id}:ProdutoData) : Promise<Usuario>;
 }
