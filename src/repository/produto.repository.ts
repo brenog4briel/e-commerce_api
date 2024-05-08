@@ -1,11 +1,8 @@
 import { prisma } from "../database/prisma-client";
 import { CriacaoProduto, Produto, ProdutoRepository } from "../interfaces/produto.interface";
-import { UsuarioRepositoryPrisma } from "./usuario.repository";
-
 
 class ProdutoRepositoryPrisma implements ProdutoRepository {
 
-   private usuarioRepository = new UsuarioRepositoryPrisma();
 
     async create(data: CriacaoProduto): Promise<Produto> {
         const result = await prisma.produto.create({
@@ -14,7 +11,7 @@ class ProdutoRepositoryPrisma implements ProdutoRepository {
                 preco: data.preco,
                 proprietario: data.proprietario,
                 qtd_estoque: data.qtd_estoque,
-                usuario_id: data.usuario_id
+                usuario_id: data.usuario_id,
             }
         })
 

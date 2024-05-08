@@ -1,10 +1,11 @@
 import { prisma } from "../database/prisma-client";
-import { Usuario, UsuarioRepository } from "../interfaces/usuario.interface";
+import { Produto } from "../interfaces/produto.interface";
+import { Usuario, UsuarioData, UsuarioRepository } from "../interfaces/usuario.interface";
 import bcrypt from "bcryptjs";
 
 
 class UsuarioRepositoryPrisma implements UsuarioRepository {
-    async create(data:Usuario): Promise<Usuario> {
+    async create(data:UsuarioData): Promise<Usuario> {
         const hashedPassword = await bcrypt.hash(data.senha,10);
         const result = await prisma.usuario.create({
             data:{
@@ -13,9 +14,9 @@ class UsuarioRepositoryPrisma implements UsuarioRepository {
                 email: data.email,
                 endereco: data.endereco,
                 CEP: data.CEP,
-                lista_de_desejos:undefined,
-                produto:undefined,
-                pedido_de_compra:undefined
+                produtos:{},
+                lista_de_desejos:{},
+                pedido_de_compra:{}   
             }
         })
         return result;
@@ -37,6 +38,36 @@ class UsuarioRepositoryPrisma implements UsuarioRepository {
             }
         })
         return result?.email || null
+    }
+
+    async updateUserInfo(usuario_id:string,nome:string,endereco:string,CEP:string) : Promise<Usuario> {
+        const result = await prisma.usuario.update({
+            where: {
+                usuario_id,
+            },
+            data:{
+                nome,
+                endereco,
+                CEP,
+            }
+        })
+
+        return result;
+    }
+
+   async updateUserProducts(usuario:Usuario, produto: Produto): Promise<Usuario> {
+        const result = await prisma.usuario.update({
+            where:{
+                usuario_id: usuario.usuario_id,
+            },
+            data:{
+                produtos:{
+                    create:produto
+                }
+            }
+        })
+
+        return result;
     }
 }
 

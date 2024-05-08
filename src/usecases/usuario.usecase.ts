@@ -15,6 +15,12 @@ class UsuarioUseCase {
         const result = await this.usuarioRepository.create({nome,senha,email,endereco,CEP});
         return result;
     }
+
+    async updateUserInfo({usuario_id, nome, endereco, CEP }: Usuario): Promise<Usuario> {
+        const result = await this.usuarioRepository.updateUserInfo(usuario_id, nome, endereco, CEP );
+        return result;
+
+    }
 }
 
 export {UsuarioUseCase}

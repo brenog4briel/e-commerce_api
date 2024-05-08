@@ -4,9 +4,11 @@ export interface Produto {
     preco: number;
     proprietario: string;
     qtd_estoque: number;
+    pedido_de_compra_id?: string;
+    lista_de_desejos_id?: string;
+    usuario_id?: string;
     criadoEm?: Date;
     atualizadoEm?: Date;
-    usuario_id?: string;
 }
 
 export interface CriacaoProduto {
