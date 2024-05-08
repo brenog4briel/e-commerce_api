@@ -1,4 +1,4 @@
-import { CriacaoUsuario, Usuario, UsuarioRepository } from "../interfaces/usuario.interface";
+import { Usuario, UsuarioRepository } from "../interfaces/usuario.interface";
 import { UsuarioRepositoryPrisma } from "../repository/usuario.repository";
 
 class UsuarioUseCase {
@@ -7,7 +7,7 @@ class UsuarioUseCase {
         this.usuarioRepository = new UsuarioRepositoryPrisma()
     }
 
-    async create({nome,email,senha,endereco,CEP}:CriacaoUsuario): Promise<Usuario> {
+    async create({nome,email,senha,endereco,CEP}:Usuario): Promise<Usuario> {
 
         const usuarioExiste = await this.usuarioRepository.findByEmail(email);
         if (usuarioExiste) {throw new Error("Usuário já cadastrado!")}

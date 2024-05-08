@@ -1,10 +1,10 @@
 import { prisma } from "../database/prisma-client";
-import { CriacaoUsuario, Usuario, UsuarioRepository } from "../interfaces/usuario.interface";
+import { Usuario, UsuarioRepository } from "../interfaces/usuario.interface";
 import bcrypt from "bcryptjs";
 
 
 class UsuarioRepositoryPrisma implements UsuarioRepository {
-    async create(data:CriacaoUsuario): Promise<Usuario> {
+    async create(data:Usuario): Promise<Usuario> {
         const hashedPassword = await bcrypt.hash(data.senha,10);
         const result = await prisma.usuario.create({
             data:{
@@ -13,6 +13,9 @@ class UsuarioRepositoryPrisma implements UsuarioRepository {
                 email: data.email,
                 endereco: data.endereco,
                 CEP: data.CEP,
+                lista_de_desejos:undefined,
+                produto:undefined,
+                pedido_de_compra:undefined
             }
         })
         return result;
