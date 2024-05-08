@@ -1,3 +1,5 @@
+import { Produto } from "./produto.interface";
+
 export interface Pedido_de_compra {
     usuario_id: string;
     data: Date;
@@ -6,4 +8,5 @@ export interface Pedido_de_compra {
     endereco: string;
     CEP: string;
     desconto: number | null;
+    produto: Produto[];
 }

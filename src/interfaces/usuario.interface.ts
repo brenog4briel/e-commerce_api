@@ -1,3 +1,7 @@
+import { Lista_de_desejos } from "./lista_de_desejos.interface";
+import { Pedido_de_compra } from "./pedido_de_compra.interface";
+import {Produto} from "./produto.interface"
+
 export interface Usuario {
     usuario_id: string;
     nome: string;
@@ -5,6 +9,9 @@ export interface Usuario {
     email: string;
     endereco: string;
     CEP: string;
+    produtos: Produto[];
+    lista_de_desejos: Lista_de_desejos;
+    pedido_de_compra: Pedido_de_compra;
     criadoEm: Date
     atualizadoEm: Date
 }

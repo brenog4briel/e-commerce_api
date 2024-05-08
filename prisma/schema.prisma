@@ -57,7 +57,8 @@ model Produto {
 
   usuario Usuario @relation(fields: [usuario_id],references: [usuario_id])
   usuario_id String 
-  pedido_de_compra Pedido_de_compra[]
-  lista_de_desejos Lista_de_desejos[]
+  pedido_de_compra Pedido_de_compra @relation(fields: [pedido_de_compra_id],references: [usuario_id])
+  pedido_de_compra_id String
+  lista_de_desejos Lista_de_desejos @relation(fields: [lista_de_desejos_id],references: [usuario_id])
+  lista_de_desejos_id String
 }
-
