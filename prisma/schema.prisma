@@ -36,11 +36,10 @@ model Lista_de_desejos {
 model Pedido_de_compra {
   pedido_de_compra_id String @default(uuid()) @id
   data DateTime @default(now())
-  numero String
   total_a_pagar Float
   endereco String
   CEP String
-  desconto Float
+  desconto Float?
 
   usuario Usuario @relation(fields: [usuario_id],references: [usuario_id])
   usuario_id String @unique 

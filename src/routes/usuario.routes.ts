@@ -13,9 +13,8 @@ export async function UsuarioRoutes(fastify:FastifyInstance) {
     })
 
     fastify.post<{Body:UsuarioData}>("/",async(req,reply) => {
-        const {nome,email,senha,CEP,endereco,lista_de_desejos,pedido_de_compra,produtos} = req.body;
         try {
-            const data = await usuarioUseCase.create({nome,email,senha,CEP,endereco,lista_de_desejos,pedido_de_compra,produtos});
+            const data = await usuarioUseCase.create(req.body);
             return reply.send(data)
         } catch (error) {
             reply.send(error)
