@@ -32,5 +32,4 @@ export interface UsuarioRepository {
     findByEmail(email:string): Promise<Usuario | null>
     findEmailById(usuario_id:string | undefined): Promise<string | null>
     updateUserInfo(usuario_id:string,nome:string,endereco:string,CEP:string) : Promise<Usuario>;
-    updateUserProducts({nome,preco,proprietario,qtd_estoque,usuario_id,pedido_de_compra_id,lista_de_desejos_id}:ProdutoData) : Promise<Usuario>;
 }

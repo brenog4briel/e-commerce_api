@@ -1,5 +1,4 @@
 import { prisma } from "../database/prisma-client";
-import { ProdutoData } from "../interfaces/produto.interface";
 import { Usuario, UsuarioData, UsuarioRepository } from "../interfaces/usuario.interface";
 import bcrypt from "bcryptjs";
 
@@ -50,24 +49,6 @@ class UsuarioRepositoryPrisma implements UsuarioRepository {
                 endereco,
                 CEP,
             }
-        })
-
-        return result;
-    }
-
-   async updateUserProducts(produto: ProdutoData): Promise<Usuario> {
-        const result = await prisma.usuario.update({
-          where: {
-            usuario_id: produto.usuario_id
-          },
-          data: {
-           produtos:{
-            create: produto
-           }
-          },
-          include:{
-            produtos:true
-          }
         })
 
         return result;

@@ -1,21 +1,15 @@
 import { ProdutoData, Produto, ProdutoRepository } from "../interfaces/produto.interface";
-import { UsuarioRepository } from "../interfaces/usuario.interface";
 import { ProdutoRepositoryPrisma } from "../repository/produto.repository";
-import { UsuarioRepositoryPrisma } from "../repository/usuario.repository";
 
 class ProdutoUseCase {
     private produtoRepository : ProdutoRepository;
-    private usuarioRepository : UsuarioRepository;
     constructor() {
         this.produtoRepository = new ProdutoRepositoryPrisma();
-        this.usuarioRepository = new UsuarioRepositoryPrisma();
 
     }
 
     async create({nome,preco,proprietario,qtd_estoque,usuario_id}: ProdutoData) : Promise<Produto> {
         const result = await this.produtoRepository.create({nome,preco,proprietario,qtd_estoque,usuario_id});
-        this.usuarioRepository.updateUserProducts({nome,preco,proprietario,qtd_estoque,usuario_id})
-
         return result;
     }
 
