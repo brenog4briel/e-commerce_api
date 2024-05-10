@@ -22,5 +22,5 @@ export interface Pedido_de_compra_Data{
 
 export interface Pedido_de_compra_Repository {
     create(pedido_de_compra:Pedido_de_compra_Data) : Promise<Pedido_de_compra>
-    // adicionaProdutos(pedido_de_compra_id:string,produtos:ProdutoData[]) : Promise<Pedido_de_compra>
+    adicionaProdutos(pedido_de_compra_id:string,produtos:ProdutoData[]) : Promise<Pedido_de_compra>
 }

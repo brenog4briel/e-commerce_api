@@ -19,22 +19,21 @@ class Pedido_de_compra_RepositoryPrisma implements Pedido_de_compra_Repository {
         return result;
     }
 
-    // async adicionaProdutos(pedido_de_compra_id:string,produtos: ProdutoData[]): Promise<Pedido_de_compra> {
-    //     const data = await prisma.pedido_de_compra.update({
-    //         where:{
-    //             pedido_de_compra_id: pedido_de_compra_id
-    //         },
-    //         data:{
-    //             produtos:{
-    //                 create:produtos
-    //             }
-    //         },
-    //         include:{
-    //             produtos:true
-    //         }
-    //     })
-    //     return data;
-    // }
+    async adicionaProdutos(pedido_de_compra_id:string,produtos: ProdutoData[]): Promise<Pedido_de_compra> {
+        const result = await prisma.pedido_de_compra.update({
+            where:{
+                pedido_de_compra_id: pedido_de_compra_id
+            },
+            data:{
+                produtos:{
+                    create:produtos
+                },
+            },include:
+            {produtos:false}
+            
+        })
+        return result;
+    }
 
 }
 

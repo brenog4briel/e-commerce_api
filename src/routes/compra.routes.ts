@@ -23,14 +23,12 @@ export async function CompraRoutes(fastify:FastifyInstance) {
         }
     })
 
-    //  fastify.put<{Body:{pedido_de_compra_id:string,produtos: ProdutoData[]}}>("/",async(req,reply) => { 
-    //      console.log("REQQ BODY")
-    //      console.log(req.body.produtos)
-    //     try {
-    //         const result = await pedido_de_compra.adicionaProduto(req.body.pedido_de_compra_id,req.body.produtos);
-    //         return reply.send(result)
-    //     } catch (error) {
-    //         reply.send(error)
-    //     }
-    // })
+     fastify.put<{Body:{pedido_de_compra_id:string,produtos: ProdutoData[]}}>("/",async(req,reply) => { 
+        try {
+            const result = await pedido_de_compra.adicionaProduto(req.body.pedido_de_compra_id,req.body.produtos);
+            return reply.send(result)
+        } catch (error) {
+            reply.send(error)
+        }
+    })
 }

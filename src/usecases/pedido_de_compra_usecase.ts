@@ -16,10 +16,10 @@ class Pedido_de_compra_UseCase {
         return data;
     }
 
-    //  async adicionaProduto(pedido_de_compra_id:string,produtos: ProdutoData[]): Promise<Pedido_de_compra> {
-    //     const data = await this.pedido_de_compra_repository.adicionaProdutos(pedido_de_compra_id,produtos);
-    //     return data;
-    // }
+     async adicionaProduto(pedido_de_compra_id:string,produtos: ProdutoData[]): Promise<Pedido_de_compra> {
+        const data = await this.pedido_de_compra_repository.adicionaProdutos(pedido_de_compra_id,produtos);
+        return data;
+    }
 }
 
 export {Pedido_de_compra_UseCase}
