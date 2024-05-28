@@ -21,12 +21,12 @@ export async function ProdutoRoutes(fastify: FastifyInstance) {
         }
     })
     
-    fastify.put<{Body: {nome:string,preco:number,proprietario:string,qtd_estoque:number}; Params:{produto_id:string}}>('/:produto_id',async(req,reply) => {
+    fastify.put<{Body: {nome:string,preco:number,proprietario:string,qtd_estoque:number,categoria:string}; Params:{produto_id:string}}>('/:produto_id',async(req,reply) => {
         const produto_id = req.params.produto_id;
-        const {nome,preco,proprietario,qtd_estoque} = req.body;
+        const {nome,preco,proprietario,qtd_estoque,categoria} = req.body;
 
         try {
-            const result = await produtoUseCase.update({produto_id,nome,preco,proprietario,qtd_estoque})
+            const result = await produtoUseCase.update({produto_id,nome,preco,proprietario,qtd_estoque,categoria})
             return reply.send(result);
         } catch (error) {
             reply.send(error)

@@ -8,19 +8,20 @@ class ProdutoUseCase {
 
     }
 
-    async create({nome,preco,proprietario,qtd_estoque,usuario_id}: ProdutoData) : Promise<Produto> {
-        const result = await this.produtoRepository.create({nome,preco,proprietario,qtd_estoque,usuario_id});
+    async create({nome,preco,proprietario,qtd_estoque,usuario_id,categoria}: ProdutoData) : Promise<Produto> {
+        const result = await this.produtoRepository.create({nome,preco,proprietario,qtd_estoque,usuario_id,categoria});
         return result;
     }
 
-    async update({produto_id,nome,preco,proprietario,qtd_estoque}:Produto){
+    async update({produto_id,nome,preco,proprietario,qtd_estoque,categoria}:Produto){
 
         const result = await this.produtoRepository.update({
             produto_id,
             nome,
             preco,
             proprietario,
-            qtd_estoque
+            qtd_estoque,
+            categoria
         })
         return result;
     }

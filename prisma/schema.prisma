@@ -53,6 +53,7 @@ model Produto {
   preco Float
   proprietario String
   qtd_estoque Int
+  categoria String
   criadoEm DateTime @default(now())
   atualizadoEm DateTime @updatedAt
 
