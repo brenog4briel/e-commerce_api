@@ -15,7 +15,8 @@ class UsuarioRepositoryPrisma implements UsuarioRepository {
                 CEP: data.CEP,
                 produtos:{},
                 lista_de_desejos:{},
-                pedido_de_compra:{}   
+                pedido_de_compra:{},
+                imagem: data.imagem
             }
         })
         return result;
@@ -39,7 +40,7 @@ class UsuarioRepositoryPrisma implements UsuarioRepository {
         return result?.email || null
     }
 
-    async updateUserInfo(usuario_id:string,nome:string,endereco:string,CEP:string) : Promise<Usuario> {
+    async updateUserInfo(usuario_id:string,nome:string,endereco:string,CEP:string,imagem:string) : Promise<Usuario> {
         const result = await prisma.usuario.update({
             where: {
                 usuario_id,
@@ -48,6 +49,7 @@ class UsuarioRepositoryPrisma implements UsuarioRepository {
                 nome,
                 endereco,
                 CEP,
+                imagem
             }
         })
 

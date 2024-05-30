@@ -23,9 +23,9 @@ export async function UsuarioRoutes(fastify:FastifyInstance) {
 
     fastify.put<{Body:Usuario ; Params:{usuario_id : string}}>("/:usuario_id", async(req,reply) => {
         const {usuario_id} = req.params;
-        const {nome, endereco, CEP } = req.body;
+        const {nome, endereco, CEP,imagem } = req.body;
         try {
-            const data = await usuarioUseCase.updateUserInfo(usuario_id,nome,endereco,CEP);
+            const data = await usuarioUseCase.updateUserInfo(usuario_id,nome,endereco,CEP,imagem);
             return reply.send(data)
         } catch (error) {
             reply.send(error)

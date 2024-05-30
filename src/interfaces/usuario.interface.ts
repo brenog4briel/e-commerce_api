@@ -9,7 +9,7 @@ export interface Usuario {
     email: string;
     endereco: string;
     CEP: string;
-    imagem?:string;
+    imagem:string;
     produtos?: Produto[];
     lista_de_desejos?: Lista_de_desejos;
     pedido_de_compra?: Pedido_de_compra[];
@@ -22,6 +22,7 @@ export interface UsuarioData {
     senha: string;
     email: string;
     endereco: string;
+    imagem:string;
     CEP: string;
     produtos: ProdutoData[];
     pedido_de_compra: Pedido_de_compra[];
@@ -32,5 +33,5 @@ export interface UsuarioRepository {
     create(data: UsuarioData): Promise<Usuario>
     findByEmail(email:string): Promise<Usuario | null>
     findEmailById(usuario_id:string | undefined): Promise<string | null>
-    updateUserInfo(usuario_id:string,nome:string,endereco:string,CEP:string) : Promise<Usuario>;
+    updateUserInfo(usuario_id:string,nome:string,endereco:string,CEP:string,imagem:string) : Promise<Usuario>;
 }

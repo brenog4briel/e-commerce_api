@@ -3,7 +3,7 @@ import { ProdutoData, Produto, ProdutoRepository } from "../interfaces/produto.i
 
 class ProdutoRepositoryPrisma implements ProdutoRepository {
 
-    async create({nome,preco,proprietario,qtd_estoque,usuario_id,categoria}: ProdutoData): Promise<Produto> {
+    async create({nome,preco,proprietario,qtd_estoque,usuario_id,categoria,imagem}: ProdutoData): Promise<Produto> {
         const result = await prisma.produto.create({
             data:{
                 nome,
@@ -12,13 +12,14 @@ class ProdutoRepositoryPrisma implements ProdutoRepository {
                 qtd_estoque,
                 usuario_id,
                 categoria,
+                imagem
             }
         })
 
         return result
     }
 
-    async update({produto_id,nome,preco,proprietario,qtd_estoque,categoria}: Produto): Promise<Produto> {
+    async update({produto_id,nome,preco,proprietario,qtd_estoque,categoria,imagem}: Produto): Promise<Produto> {
         const result = await prisma.produto.update({
             where:{
                 produto_id,
@@ -28,7 +29,8 @@ class ProdutoRepositoryPrisma implements ProdutoRepository {
                 preco,
                 proprietario,
                 qtd_estoque,
-                categoria
+                categoria,
+                imagem
             }
         })
         return result;
