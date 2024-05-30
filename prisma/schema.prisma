@@ -16,6 +16,7 @@ model Usuario {
   senha String
   email String
   endereco String
+  imagem String
   CEP String
   criadoEm DateTime @default(now())
   atualizadoEm DateTime @updatedAt
@@ -52,6 +53,7 @@ model Produto {
   nome String
   preco Float
   proprietario String
+  imagem String
   qtd_estoque Int
   categoria String
   criadoEm DateTime @default(now())

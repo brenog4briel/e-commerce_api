@@ -11,7 +11,7 @@ class ProdutoRepositoryPrisma implements ProdutoRepository {
                 proprietario,
                 qtd_estoque,
                 usuario_id,
-                categoria
+                categoria,
             }
         })
 

@@ -9,6 +9,7 @@ export interface Usuario {
     email: string;
     endereco: string;
     CEP: string;
+    imagem?:string;
     produtos?: Produto[];
     lista_de_desejos?: Lista_de_desejos;
     pedido_de_compra?: Pedido_de_compra[];

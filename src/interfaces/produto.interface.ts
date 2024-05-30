@@ -5,6 +5,7 @@ export interface Produto {
     proprietario: string;
     qtd_estoque: number;
     categoria: string;
+    imagem?:string;
     usuario_id?: string;
     criadoEm?: Date;
     atualizadoEm?: Date;
