@@ -44,5 +44,23 @@ export async function ProdutoRoutes(fastify: FastifyInstance) {
         }
     })
 
+    fastify.get<{Body: {categoria:string}}>("/produtos/:categoria", async(req,reply) => {
+        try {
+            const result = await produtoUseCase.listByCategories(req.body.categoria);
+            return reply.send(result);
+        } catch (error) {
+            reply.send(error);
+        }
+    })
+    
+    fastify.get("/produtos", async(req,reply) => {
+        try {
+            const result = await produtoUseCase.listAllProducts();
+            return reply.send(result);
+        } catch (error) {
+            reply.send(error);
+        }
+    })
+
 
 } 

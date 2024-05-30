@@ -65,6 +65,20 @@ class ProdutoRepositoryPrisma implements ProdutoRepository {
             
         return result || null;
     }
+
+    async listByCategories(categoria: string): Promise<Produto[] | null> {
+        const result = await prisma.produto.findMany({
+            where: {
+                categoria
+            }
+        })
+        return result || null;
+    }
+
+    async listAllProducts(): Promise<Produto[] | null> {
+        const result = await prisma.produto.findMany();
+        return result || null
+    }
 }
 
 export {ProdutoRepositoryPrisma}

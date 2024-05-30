@@ -40,6 +40,16 @@ class ProdutoUseCase {
         const result = await this.produtoRepository.findOne(nome,proprietario);
         return result || null;
     }   
+    
+    async listByCategories(categoria:string): Promise<Produto[] | null> {
+        const result = await this.produtoRepository.listByCategories(categoria);
+        return result || null;
+    }
+
+    async listAllProducts(): Promise<Produto[] | null> {
+        const result = await this.produtoRepository.listAllProducts();
+        return result || null;
+    }
 }
 
 export {ProdutoUseCase}
