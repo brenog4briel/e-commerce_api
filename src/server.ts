@@ -2,6 +2,7 @@ import fastify, { FastifyInstance } from "fastify";
 import { UsuarioRoutes } from "./routes/usuario.routes";
 import { ProdutoRoutes } from "./routes/produto.routes";
 import { CompraRoutes } from "./routes/compra.routes";
+import { env } from "process";
 
 const app: FastifyInstance = fastify();
 
@@ -17,6 +18,6 @@ app.register(CompraRoutes, {
     prefix:"/compra"
 })
 
-app.listen({ port: 3500 }, () => {
+app.listen({ port:3500,host: '0.0.0.0' }, () => {
   console.log("The server is running in port 3500");
 });
