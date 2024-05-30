@@ -77,10 +77,13 @@ class ProdutoRepositoryPrisma implements ProdutoRepository {
         return result || null;
     }
 
-    async listAllProducts(): Promise<Produto[] | null> {
-        const result = await prisma.produto.findMany();
+    async listAllProducts(pagina:number): Promise<Produto[] | null> {
+        const result = await prisma.produto.findMany({
+            take: pagina * 10
+        });
         return result || null
     }
+    
 }
 
 export {ProdutoRepositoryPrisma}

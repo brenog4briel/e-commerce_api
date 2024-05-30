@@ -8,12 +8,12 @@ class ProdutoUseCase {
 
     }
 
-    async create({nome,preco,proprietario,qtd_estoque,usuario_id,categoria}: ProdutoData) : Promise<Produto> {
-        const result = await this.produtoRepository.create({nome,preco,proprietario,qtd_estoque,usuario_id,categoria});
+    async create({nome,preco,proprietario,qtd_estoque,usuario_id,categoria,imagem}: ProdutoData) : Promise<Produto> {
+        const result = await this.produtoRepository.create({nome,preco,proprietario,qtd_estoque,usuario_id,categoria,imagem});
         return result;
     }
 
-    async update({produto_id,nome,preco,proprietario,qtd_estoque,categoria}:Produto){
+    async update({produto_id,nome,preco,proprietario,qtd_estoque,categoria,imagem}:Produto){
 
         const result = await this.produtoRepository.update({
             produto_id,
@@ -21,7 +21,8 @@ class ProdutoUseCase {
             preco,
             proprietario,
             qtd_estoque,
-            categoria
+            categoria,
+            imagem
         })
         return result;
     }
@@ -46,8 +47,8 @@ class ProdutoUseCase {
         return result || null;
     }
 
-    async listAllProducts(): Promise<Produto[] | null> {
-        const result = await this.produtoRepository.listAllProducts();
+    async listAllProducts(pagina:number): Promise<Produto[] | null> {
+        const result = await this.produtoRepository.listAllProducts(pagina);
         return result || null;
     }
 }

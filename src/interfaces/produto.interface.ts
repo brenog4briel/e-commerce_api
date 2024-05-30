@@ -28,5 +28,5 @@ export interface ProdutoRepository {
     findOne(nome:string,proprietario:string): Promise<Produto | null>
     delete(produto_id:string): Promise<boolean>
     listByCategories(categoria:string):Promise<Produto[] | null>
-    listAllProducts(): Promise<Produto[] | null>
+    listAllProducts(pagina:number): Promise<Produto[] | null>
 }
