@@ -18,6 +18,6 @@ app.register(CompraRoutes, {
     prefix:"/compra"
 })
 
-app.listen({ port:3500,host: '0.0.0.0' }, () => {
+app.listen({ port:3500 }, () => {
   console.log("The server is running in port 3500");
 });
