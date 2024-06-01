@@ -19,7 +19,7 @@ app.register(CompraRoutes, {
 })
 
 app.register(cors,{
-  origin:"https://e-commerce-api-5sxy.onrender.com",
+  origin:"*",
   credentials:true,
   optionsSuccessStatus:200
 })
