@@ -3,6 +3,7 @@ import { UsuarioRoutes } from "./routes/usuario.routes";
 import { ProdutoRoutes } from "./routes/produto.routes";
 import { CompraRoutes } from "./routes/compra.routes";
 import 'dotenv/config'
+import cors from "@fastify/cors"
 const app: FastifyInstance = fastify();
 
 app.register(UsuarioRoutes, {
@@ -15,6 +16,12 @@ app.register(ProdutoRoutes,{
 
 app.register(CompraRoutes, {
     prefix:"/compra"
+})
+
+app.register(cors,{
+  origin:"https://e-commerce-api-5sxy.onrender.com",
+  credentials:true,
+  optionsSuccessStatus:200
 })
 
 app.listen({host:"0.0.0.0",port:process.env.PORT? Number(process.env.PORT) : 4000 }, () => {
