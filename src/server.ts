@@ -1,4 +1,4 @@
-import fastify, { FastifyInstance, FastifyListenOptions } from "fastify";
+import fastify, { FastifyInstance } from "fastify";
 import { UsuarioRoutes } from "./routes/usuario.routes";
 import { ProdutoRoutes } from "./routes/produto.routes";
 import { CompraRoutes } from "./routes/compra.routes";

@@ -1,6 +1,6 @@
 
 import bcrypt from "bcryptjs";
-import jwt, { JwtPayload } from "jsonwebtoken"
+import jwt from "jsonwebtoken"
 import { UsuarioRepository } from "../interfaces/usuario.interface";
 import { UsuarioRepositoryPrisma } from "../repository/usuario.repository";
 
