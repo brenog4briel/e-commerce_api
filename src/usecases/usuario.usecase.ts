@@ -15,7 +15,7 @@ class UsuarioUseCase {
         return result;
     }
 
-    async updateUserInfo(usuario_id:string,nome:string,endereco:string,CEP:string,imagem:string): Promise<Usuario> {
+    async updateUserInfo(usuario_id?:string,nome?:string,endereco?:string,CEP?:string,imagem?:string): Promise<Usuario> {
         const result = await this.usuarioRepository.updateUserInfo(usuario_id, nome, endereco, CEP,imagem );
         return result;
 
