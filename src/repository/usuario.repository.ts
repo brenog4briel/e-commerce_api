@@ -16,7 +16,7 @@ class UsuarioRepositoryPrisma implements UsuarioRepository {
                 produtos:{},
                 lista_de_desejos:{},
                 pedido_de_compra:{},
-                imagem: data.imagem
+                imagem: ""
             }
         })
         return result;
