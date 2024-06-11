@@ -44,7 +44,7 @@ export async function UsuarioRoutes(fastify:FastifyInstance) {
         }
     })
 
-    fastify.get<{Params:{email:string}}>('/recuperacao/:email', async(req, reply) => {
+    fastify.post<{Params:{email:string}}>('/recuperacao/:email', async(req, reply) => {
         const transporter = nodemailer.createTransport({
             host: process.env.NODEMAIL_HOST,
             port: Number(process.env.NODEMAIL_PORT),
