@@ -57,9 +57,9 @@ class UsuarioRepositoryPrisma implements UsuarioRepository {
 
     async updateUserImage(usuario_id: string, imagem: string): Promise<Usuario> {
         const result = await prisma.usuario.update({
-            where:{ usuario_id },
+            where:{ usuario_id : usuario_id},
             data: {
-                imagem
+                imagem: imagem
             }
         })
         return result;

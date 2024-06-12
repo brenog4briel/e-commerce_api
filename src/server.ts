@@ -6,10 +6,15 @@ import 'dotenv/config'
 import cors from "@fastify/cors"
 import { UploadRoutes } from "./routes/upload.routes";
 import Multer from "fastify-multer"
+import multipart from '@fastify/multipart'
+
 
 const app: FastifyInstance = fastify();
 
+
 app.register(Multer.contentParser)
+
+app.register(multipart);
 
 app.register(UsuarioRoutes, {
   prefix: "/usuarios",

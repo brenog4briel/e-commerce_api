@@ -5,10 +5,11 @@ import { UsuarioUseCase } from "../usecases/usuario.usecase";
 export async function UploadRoutes(fastify: FastifyInstance) {
     const usuarioUseCase = new UsuarioUseCase();
 
-    fastify.post<{Body:{usuario_id:string}}>("/",{preHandler:fieldsUpload} ,async(req:any,reply:any) => {
-        const {usuario_id} = req.body;
+    fastify.post<{Params:{usuario_id:string}}>("/:usuario_id",{preHandler:fieldsUpload} ,async(req,reply) => {
+        const {usuario_id} = req.params;
+        const file = JSON.stringify(req.file);
         try {
-            usuarioUseCase.updateUserImage(usuario_id,req.file)
+            usuarioUseCase.updateUserImage(usuario_id,file)
             reply.send("Upload realizado com sucesso!")
         } catch (error) {
             throw new Error("Houve um erro ao realizar o upload do arquivo")
