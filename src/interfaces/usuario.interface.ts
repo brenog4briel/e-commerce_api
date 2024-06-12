@@ -33,5 +33,6 @@ export interface UsuarioRepository {
     create(data: UsuarioData): Promise<Usuario>
     findByEmail(email:string): Promise<Usuario | null>
     findEmailById(usuario_id:string | undefined): Promise<string | null>
-    updateUserInfo(usuario_id?:string,nome?:string,endereco?:string,CEP?:string,imagem?:string) : Promise<Usuario>;
+    updateUserInfo(usuario_id:string,nome?:string,endereco?:string,CEP?:string) : Promise<Usuario>;
+    updateUserImage(usuario_id:string,imagem:string) : Promise<Usuario>;
 }

@@ -15,11 +15,18 @@ class UsuarioUseCase {
         return result;
     }
 
-    async updateUserInfo(usuario_id?:string,nome?:string,endereco?:string,CEP?:string,imagem?:string): Promise<Usuario> {
-        const result = await this.usuarioRepository.updateUserInfo(usuario_id, nome, endereco, CEP,imagem );
+    async updateUserInfo(usuario_id:string,nome?:string,endereco?:string,CEP?:string,imagem?:string): Promise<Usuario> {
+        const result = await this.usuarioRepository.updateUserInfo(usuario_id, nome, endereco, CEP );
         return result;
 
     }
+
+    async updateUserImage(usuario_id:string,imagem:string) : Promise<Usuario> {
+        const result = await this.usuarioRepository.updateUserImage(usuario_id,imagem)
+        return result;
+    }
+
+    
 }
 
 export {UsuarioUseCase}

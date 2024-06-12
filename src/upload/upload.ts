@@ -30,12 +30,3 @@ const upload = Multer({
 })
 
 export const fieldsUpload = upload.single("file")
-
-export const uploadFile = async(req:any,reply:any) => {
-    try {
-        usuarioUseCase.updateUserInfo(req.file)
-        reply.send("Upload realizado com sucesso!")
-    } catch (error) {
-        throw new Error("Houve um erro ao realizar o upload do arquivo")
-    }
-}
