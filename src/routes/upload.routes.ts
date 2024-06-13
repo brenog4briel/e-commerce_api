@@ -1,6 +1,7 @@
 import { FastifyInstance } from "fastify";
 import { fieldsUpload } from "../upload/upload";
 import { UsuarioUseCase } from "../usecases/usuario.usecase";
+import multipart from "@fastify/multipart"
 
 export async function UploadRoutes(fastify: FastifyInstance) {
     const usuarioUseCase = new UsuarioUseCase();
