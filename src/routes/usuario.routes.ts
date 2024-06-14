@@ -18,7 +18,7 @@ export async function UsuarioRoutes(fastify:FastifyInstance) {
             const data = await usuarioUseCase.create(req.body);
             return reply.send(data)
         } catch (error) {
-            reply.send(error)
+            throw new Error("Houve um erro ao criar o usuário")
         }
     })
 
@@ -29,7 +29,8 @@ export async function UsuarioRoutes(fastify:FastifyInstance) {
             const data = await usuarioUseCase.updateUserInfo(usuario_id,nome,endereco,CEP);
             return reply.send(data)
         } catch (error) {
-            reply.send(error)
+            throw new Error("Houve um erro ao atualizar o usuário")
+
         }
     })
 
@@ -40,7 +41,7 @@ export async function UsuarioRoutes(fastify:FastifyInstance) {
             const data = await authService.login(email,senha)
             return reply.send(data)
         } catch (error) {
-            reply.send(error)
+            throw new Error("Houve um erro ao realizar a autenticação")
         }
     })
 
@@ -66,6 +67,7 @@ export async function UsuarioRoutes(fastify:FastifyInstance) {
         })
         } catch (error) {
             reply.send(error)
+            throw new Error("Houve um erro ao realizar a recuperação de senha")
         }
         
     })

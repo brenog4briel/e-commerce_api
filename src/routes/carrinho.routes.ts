@@ -19,7 +19,8 @@ export async function CarrinhoRoutes(fastify:FastifyInstance) {
             const result = await lista_de_desejos_Usecase.create(req.body);
             return reply.send(result);
         } catch (error) {
-            reply.send(error);
+            throw new Error("Houve um erro ao criar o carrinho de compras")
+
         }
     })
 
@@ -28,7 +29,7 @@ export async function CarrinhoRoutes(fastify:FastifyInstance) {
             const result = await lista_de_desejos_Usecase.adicionaProduto(req.body.lista_de_desejos_id,req.body.produtos);
             return reply.send(result);
         } catch (error) {
-            reply.send(error);
+            throw new Error("Houve um erro ao atualizar o carrinho de compras")
         }
     })
 }

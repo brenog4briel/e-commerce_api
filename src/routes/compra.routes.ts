@@ -19,7 +19,7 @@ export async function CompraRoutes(fastify:FastifyInstance) {
             const result = await pedido_de_compra.create(req.body);
             return reply.send(result)
         } catch (error) {
-            reply.send(error)
+            throw new Error("Houve um erro ao criar o pedido de compra")
         }
     })
 
@@ -28,7 +28,8 @@ export async function CompraRoutes(fastify:FastifyInstance) {
             const result = await pedido_de_compra.adicionaProduto(req.body.pedido_de_compra_id,req.body.produtos);
             return reply.send(result)
         } catch (error) {
-            reply.send(error)
+            throw new Error("Houve um erro ao atualizar o pedido de compra")
+
         }
     })
 }

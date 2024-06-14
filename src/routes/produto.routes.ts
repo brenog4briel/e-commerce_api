@@ -17,7 +17,8 @@ export async function ProdutoRoutes(fastify: FastifyInstance) {
             const result = await produtoUseCase.create(req.body);
             return reply.send(result);
         } catch (error) {
-            reply.send(error);
+            throw new Error("Houve um erro ao criar o produto")
+
         }
     })
     
@@ -29,18 +30,18 @@ export async function ProdutoRoutes(fastify: FastifyInstance) {
             const result = await produtoUseCase.update({produto_id,nome,preco,proprietario,qtd_estoque,categoria,imagem})
             return reply.send(result);
         } catch (error) {
-            reply.send(error)
+            throw new Error("Houve um erro ao atualizar o produto")
+
         }
     })
 
     fastify.delete<{Params:{produto_id:string}}>("/:produto_id",async(req,reply) => {
         const {produto_id} = req.params;
-        console.log(produto_id)
         try {
             const result = await produtoUseCase.delete(produto_id);
             return reply.send(result);
         } catch (error) {
-            reply.send(error)
+            throw new Error("Houve um erro ao deletar o produto")
         }
     })
 
@@ -51,7 +52,7 @@ export async function ProdutoRoutes(fastify: FastifyInstance) {
             const result = await produtoUseCase.listByCategories(lowerCaseCategoria);
             return reply.send(result);
         } catch (error) {
-            reply.send(error);
+            throw new Error("Houve um erro ao resgatar o produto")
         }
     })
     
@@ -61,7 +62,7 @@ export async function ProdutoRoutes(fastify: FastifyInstance) {
             const result = await produtoUseCase.listAllProducts(pagina);
             return reply.send(result);
         } catch (error) {
-            reply.send(error);
+            throw new Error("Houve um erro ao resgatar os produto")
         }
     })
 
