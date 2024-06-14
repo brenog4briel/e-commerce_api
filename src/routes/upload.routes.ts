@@ -1,12 +1,28 @@
 import { FastifyInstance } from "fastify";
-import { fieldsUpload } from "../upload/upload";
 import { UsuarioUseCase } from "../usecases/usuario.usecase";
+import Multer from "fastify-multer"
 import multipart from "@fastify/multipart"
 
 export async function UploadRoutes(fastify: FastifyInstance) {
     const usuarioUseCase = new UsuarioUseCase();
 
-    fastify.post<{Params:{usuario_id:string}}>("/:usuario_id",{preHandler:fieldsUpload} ,async(req,reply) => {
+    const ROOT_PATH = process.env.ROOT_PATH || __dirname
+
+    const storage = Multer.diskStorage({
+        destination: function(req,file,cb) {
+            cb(null,ROOT_PATH);
+        },
+        filename: function(req,file,cb) {
+            cb(null,file.originalname)
+        }
+    })
+
+    const upload = Multer({
+        storage:storage
+    })
+
+
+    fastify.post<{Params:{usuario_id:string}}>("/:usuario_id",{preHandler:upload.single("file")} ,async(req,reply) => {
         const {usuario_id} = req.params;
         const file = JSON.stringify(req.file);
         try {
