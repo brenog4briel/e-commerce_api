@@ -6,14 +6,12 @@ import multipart from "@fastify/multipart"
 export async function UploadRoutes(fastify: FastifyInstance) {
     const usuarioUseCase = new UsuarioUseCase();
 
-    const ROOT_PATH = process.env.ROOT_PATH || "src/upload"
-
     const storage = Multer.diskStorage({
         destination: function(req,file,cb) {
-            cb(null,ROOT_PATH);
+            cb(null,__dirname);
         },
         filename: function(req,file,cb) {
-            cb(null,file.originalname)
+            cb(null,new Date().toISOString() + file.originalname)
         }
     })
 
