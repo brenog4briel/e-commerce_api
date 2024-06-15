@@ -2,13 +2,12 @@ import { FastifyInstance } from "fastify";
 import { UsuarioUseCase } from "../usecases/usuario.usecase";
 import Multer from "fastify-multer"
 import multipart from "@fastify/multipart"
-
 export async function UploadRoutes(fastify: FastifyInstance) {
     const usuarioUseCase = new UsuarioUseCase();
 
     const storage = Multer.diskStorage({
         destination: function(req,file,cb) {
-            cb(null,__dirname);
+            cb(null,"../upload/");
         },
         filename: function(req,file,cb) {
             cb(null,new Date().toISOString() + file.originalname)
