@@ -7,7 +7,7 @@ export async function UploadRoutes(fastify: FastifyInstance) {
 
     const storage = Multer.diskStorage({
         destination: function(req,file,cb) {
-            cb(null,"/upload/");
+            cb(null,process.env.UPLOAD_PATH || "src/upload");
         },
         filename: function(req,file,cb) {
             cb(null,new Date().toISOString() + file.originalname)
