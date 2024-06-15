@@ -61,6 +61,7 @@ export async function UsuarioRoutes(fastify:FastifyInstance) {
             let message = await transporter.sendMail({
             from: 'brenosacerdote@academico.ufs.br',
             to: email,
+            replyTo:email,
             subject: 'Sending Email using Node.js',
             text: 'That was easy!',
             html:`<h1>Email enviado para ${email}</h1>`
