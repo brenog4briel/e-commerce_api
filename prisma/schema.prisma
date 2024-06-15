@@ -16,7 +16,7 @@ model Usuario {
   senha String
   email String
   endereco String
-  imagem String
+  imagem String @db.VarChar(1000)
   CEP String
   criadoEm DateTime @default(now())
   atualizadoEm DateTime @updatedAt
@@ -53,7 +53,7 @@ model Produto {
   nome String
   preco Float
   proprietario String
-  imagem String
+  imagem String @db.VarChar(1000)
   qtd_estoque Int
   categoria String
   criadoEm DateTime @default(now())
