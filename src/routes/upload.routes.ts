@@ -10,7 +10,7 @@ export async function UploadRoutes(fastify: FastifyInstance) {
             cb(null,process.env.UPLOAD_PATH || "src/upload");
         },
         filename: function(req,file,cb) {
-            cb(null,new Date().toISOString() + file.originalname)
+            cb(null,file.originalname)
         }
     })
 
