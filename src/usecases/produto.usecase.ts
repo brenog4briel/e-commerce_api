@@ -51,6 +51,11 @@ class ProdutoUseCase {
         const result = await this.produtoRepository.listAllProducts(pagina);
         return result || null;
     }
+
+    async updateProductImage(produto_id:string,imagem:string) : Promise<Produto> {
+        const result = await this.produtoRepository.updateProductImage(produto_id,imagem)
+        return result;
+    }
 }
 
 export {ProdutoUseCase}

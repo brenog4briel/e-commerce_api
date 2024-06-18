@@ -83,6 +83,14 @@ class ProdutoRepositoryPrisma implements ProdutoRepository {
         });
         return result || null
     }
+
+    async updateProductImage(produto_id: string, imagem: string): Promise<Produto> {
+        const result = await prisma.produto.update({
+            where: {produto_id:produto_id},
+            data:{imagem: imagem}
+        })
+        return result
+    }
     
 }
 

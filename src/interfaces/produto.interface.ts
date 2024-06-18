@@ -29,4 +29,6 @@ export interface ProdutoRepository {
     delete(produto_id:string): Promise<boolean>
     listByCategories(categoria:string):Promise<Produto[] | null>
     listAllProducts(pagina:number): Promise<Produto[] | null>
+    updateProductImage(produto_id:string,imagem:string) : Promise<Produto>;
+
 }

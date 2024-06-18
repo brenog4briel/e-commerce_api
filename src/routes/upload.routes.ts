@@ -1,29 +1,30 @@
 import { FastifyInstance } from "fastify";
 import { UsuarioUseCase } from "../usecases/usuario.usecase";
-import Multer from "fastify-multer"
-import multipart from "@fastify/multipart"
+import { ProdutoUseCase } from "../usecases/produto.usecase";
+
 export async function UploadRoutes(fastify: FastifyInstance) {
+
     const usuarioUseCase = new UsuarioUseCase();
+    const produtoUseCase = new ProdutoUseCase();
 
-    const storage = Multer.diskStorage({
-        destination: function(req,file,cb) {
-            cb(null,"src/upload");
-        },
-        filename: function(req,file,cb) {
-            cb(null,file.originalname)
-        }
-    })
-
-    const upload = Multer({
-        storage:storage
-    })
-
-
-    fastify.post<{Params:{usuario_id:string}}>("/:usuario_id",{preHandler:upload.single("file")} ,async(req,reply) => {
+    fastify.post<{Params:{usuario_id:string}; Body:{imagem:string}}>("/imagem-usuario/:usuario_id",async(req,reply) => {
         const {usuario_id} = req.params;
-        const file = JSON.stringify(req.file);
+        const {imagem} = req.body;
+
         try {
-            usuarioUseCase.updateUserImage(usuario_id,file)
+            usuarioUseCase.updateUserImage(usuario_id,imagem)
+            reply.send("Upload realizado com sucesso!")
+        } catch (error) {
+            throw new Error("Houve um erro ao realizar o upload do arquivo")
+        }
+    });
+
+    fastify.post<{Params:{produto_id:string}; Body:{imagem:string}}>("/imagem-produto/:usuario_id",async(req,reply) => {
+        const {produto_id} = req.params;
+        const {imagem} = req.body;
+        
+        try {
+            produtoUseCase.updateProductImage(produto_id,imagem)
             reply.send("Upload realizado com sucesso!")
         } catch (error) {
             throw new Error("Houve um erro ao realizar o upload do arquivo")

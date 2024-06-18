@@ -66,5 +66,7 @@ export async function ProdutoRoutes(fastify: FastifyInstance) {
         }
     })
 
+    
+
 
 } 
