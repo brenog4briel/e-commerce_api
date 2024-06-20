@@ -14,7 +14,7 @@ model Usuario {
   usuario_id String @id @default(uuid())
   nome String
   senha String
-  email String
+  email String @unique
   endereco String
   imagem String @db.VarChar(1000)
   CEP String
