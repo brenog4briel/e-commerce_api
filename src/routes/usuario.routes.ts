@@ -13,6 +13,26 @@ export async function UsuarioRoutes(fastify:FastifyInstance) {
         reply.send("Olá!")
     })
 
+    fastify.get<{Params:{usuario_id:string}}>("/id=:usuario_id",async(req,reply) => {
+        const {usuario_id} = req.params;
+        try {
+            const data = await usuarioUseCase.findByEmail(usuario_id);
+            return reply.send(data)
+        } catch (error) {
+            throw new Error("Houve um erro ao criar o usuário")
+        }
+    })
+
+    fastify.get<{Params:{email:string}}>("/email=:email",async(req,reply) => {
+        const {email} = req.params;
+        try {
+            const data = await usuarioUseCase.findEmailById(email);
+            return reply.send(data)
+        } catch (error) {
+            throw new Error("Houve um erro ao criar o usuário")
+        }
+    })
+
     fastify.post<{Body:UsuarioData}>("/",async(req,reply) => {
         try {
             const data = await usuarioUseCase.create(req.body);

@@ -15,6 +15,16 @@ class UsuarioUseCase {
         return result;
     }
 
+    async findByEmail(email:string): Promise<Usuario | null> {
+        const result = await this.usuarioRepository.findByEmail(email);
+        return result
+    }
+
+    async findEmailById(usuario_id: string): Promise<string | null> {
+        const result = await this.usuarioRepository.findEmailById(usuario_id);
+        return result;
+    }
+
     async updateUserInfo(usuario_id:string,nome?:string,endereco?:string,CEP?:string,imagem?:string): Promise<Usuario> {
         const result = await this.usuarioRepository.updateUserInfo(usuario_id, nome, endereco, CEP );
         return result;
