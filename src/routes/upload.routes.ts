@@ -10,7 +10,6 @@ export async function UploadRoutes(fastify: FastifyInstance) {
     fastify.post<{Params:{usuario_id:string}; Body:{imagem:string}}>("/imagem-usuario/:usuario_id",async(req,reply) => {
         const {usuario_id} = req.params;
         const {imagem} = req.body;
-
         try {
             usuarioUseCase.updateUserImage(usuario_id,imagem)
             reply.send("Upload realizado com sucesso!")

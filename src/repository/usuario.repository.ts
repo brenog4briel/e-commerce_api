@@ -23,7 +23,6 @@ class UsuarioRepositoryPrisma implements UsuarioRepository {
     }
 
     async findByEmail(email:string): Promise<Usuario | null> {
-        console.log("REPOSITORIO: ",email)
         const result = await prisma.usuario.findFirst({
             where:{
                 email
