@@ -15,7 +15,6 @@ class ProdutoRepositoryPrisma implements ProdutoRepository {
                 imagem
             }
         })
-
         return result
     }
 

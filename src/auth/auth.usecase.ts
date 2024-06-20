@@ -23,7 +23,7 @@ class AuthService {
     }
 
     async verifyToken(token: string) {
-        const decodedToken:any = jwt.verify(token, "helloworld");
+        const decodedToken:any = jwt.verify(token, process.env.JWT_SECRET? process.env.JWT_SECRET : "");
         const usuario = await this.usuarioRepository.findByEmail(decodedToken.email);
         return usuario;
     }

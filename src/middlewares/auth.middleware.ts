@@ -3,10 +3,10 @@ import { AuthService } from "../auth/auth.usecase";
 
 export async function authMiddleware(req:FastifyRequest,reply:FastifyReply) {
     const authService = new AuthService();
+    const tokenReceived : string = req.headers.authorization!;
+    const tokenFormatted = tokenReceived.slice(7,tokenReceived.length)
 
-    const token:any = req.headers["token"];
-
-    if (!token) {reply.status(401).send({message:"Usuário não autorizado!"})}
+    if (!tokenFormatted) {reply.status(401).send({message:"Usuário não autorizado!"})}
     
-    const isAuth = await authService.verifyToken(token);
+    const isAuth = await authService.verifyToken(tokenFormatted);
     }
