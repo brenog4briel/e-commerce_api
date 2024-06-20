@@ -18,7 +18,7 @@ class AuthService {
         const comparaSenha = bcrypt.compareSync(senha, usuario.senha);
         if (!comparaSenha) {throw new Error("Email ou senha incorreto!")};
 
-        const token = jwt.sign({ id: usuario.usuario_id, email: usuario.email }, "helloworld", { expiresIn: "1d" });
+        const token = jwt.sign({ id: usuario.usuario_id, email: usuario.email }, process.env.JWT_SECRET ? process.env.JWT_SECRET : "", { expiresIn: "1d" });
         return { token, usuario };
     }
 
