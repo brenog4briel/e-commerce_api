@@ -7,7 +7,7 @@ export async function UploadRoutes(fastify: FastifyInstance) {
     const usuarioUseCase = new UsuarioUseCase();
     const produtoUseCase = new ProdutoUseCase();
 
-    fastify.post<{Params:{usuario_id:string}; Body:{imagem:string}}>("/imagem-usuario/:usuario_id",async(req,reply) => {
+    fastify.post<{Params:{usuario_id:string}; Body:{imagem:string}}>("/usuario/:usuario_id",async(req,reply) => {
         const {usuario_id} = req.params;
         const {imagem} = req.body;
         try {
@@ -18,7 +18,7 @@ export async function UploadRoutes(fastify: FastifyInstance) {
         }
     });
 
-    fastify.post<{Params:{produto_id:string}; Body:{imagem:string}}>("/imagem-produto/:usuario_id",async(req,reply) => {
+    fastify.post<{Params:{produto_id:string}; Body:{imagem:string}}>("/produto/:produto_id",async(req,reply) => {
         const {produto_id} = req.params;
         const {imagem} = req.body;
         
