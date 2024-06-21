@@ -77,18 +77,24 @@ export async function UsuarioRoutes(fastify:FastifyInstance) {
     });
 
         let email = req.params.email
-        try {
-            let message = await transporter.sendMail({
-            from: 'brenosacerdote@academico.ufs.br',
-            to: email,
-            replyTo:email,
-            subject: 'Sending Email using Node.js',
-            text: 'That was easy!',
-            html:`<h1>Email enviado para ${email}</h1>`
-        })
-        } catch (error) {
-            reply.send(error)
-            throw new Error("Houve um erro ao realizar a recuperação de senha")
+        const emailExiste = await usuarioUseCase.findByEmail(email);
+        if (emailExiste) {
+            try {
+                let message = await transporter.sendMail({
+                from: 'brenosacerdote@academico.ufs.br',
+                to: email,
+                replyTo:email,
+                subject: 'Sending Email using Node.js',
+                text: 'That was easy!',
+                html:`<h1>Email enviado para ${email}</h1>`
+            })
+            } catch (error) {
+                reply.send(error)
+                throw new Error("Houve um erro ao realizar a recuperação de senha")
+            }
+        }
+        else {
+            throw new Error("O email fornecido não está cadastrado no banco de dados!")
         }
         
     })
