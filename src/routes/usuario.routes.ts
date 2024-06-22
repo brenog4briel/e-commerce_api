@@ -66,26 +66,28 @@ export async function UsuarioRoutes(fastify:FastifyInstance) {
     })
 
     fastify.post<{Params:{email:string}}>('/recuperacao/:email', async(req, reply) => {
+        const {email} = req.params;
+
         const transporter = nodemailer.createTransport({
+            service:"gmail",
             host: process.env.NODEMAIL_HOST,
             port: Number(process.env.NODEMAIL_PORT),
-            secure: false, // use SSL
+            secure:true,
             auth: {
                 user: process.env.NODEMAIL_USER,
                 pass: process.env.NODEMAIL_PASS,
             }
     });
-
-        let email = req.params.email
+       
+    
         try {
             let message = await transporter.sendMail({
-            from: 'brenosacerdote@academico.ufs.br',
-            to: email,
-            replyTo:email,
-            subject: 'Sending Email using Node.js',
-            text: 'That was easy!',
-            html:`<h1>Email enviado para ${email}</h1>`
-        })
+                from: process.env.NODEMAIL_USER,
+                to: email,
+                subject: 'Recuperação de senha E-commerce',
+                text: 'That was easy!',
+                html:`<h1>Email enviado para ${email}</h1>`
+            })
         } catch (error) {
             reply.send(error)
             throw new Error("Houve um erro ao realizar a recuperação de senha")
