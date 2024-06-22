@@ -3,11 +3,17 @@ import { UsuarioData, Usuario } from "../interfaces/usuario.interface";
 import { UsuarioUseCase } from "../usecases/usuario.usecase";
 import { AuthService } from "../auth/auth.usecase";
 import nodemailer from "nodemailer"
+import Mailgun from "mailgun.js";
+import formData from "form-data"
 
 export async function UsuarioRoutes(fastify:FastifyInstance) {
 
     const usuarioUseCase = new UsuarioUseCase();
     const authService = new AuthService();
+   
+
+    const mailgun = new Mailgun(formData);
+    const client = mailgun.client({username: 'api', key: process.env.MAILGUN_API_KEY!});
 
     fastify.get("/",(req,reply) => {
         reply.send("Olá!")
@@ -68,35 +74,26 @@ export async function UsuarioRoutes(fastify:FastifyInstance) {
     fastify.post<{Params:{email:string}}>('/recuperacao/:email', async(req, reply) => {
         const {email} = req.params;
 
-        const transporter = nodemailer.createTransport({
-            service:"gmail",
-            host: process.env.NODEMAIL_HOST,
-            port: Number(process.env.NODEMAIL_PORT),
-            secure:true,
-            auth: {
-                user: process.env.NODEMAIL_USER,
-                pass: process.env.NODEMAIL_PASS,
-            }
-    });
-
         const emailExiste = await usuarioUseCase.findByEmail(email);
-        if (emailExiste) {
+        // if (emailExiste) {
             try {
-                let message = await transporter.sendMail({
-                from: process.env.NODEMAIL_HOST,
-                to: email,
-                subject: 'Recuperação de senha E-commerce',
-                text: 'That was easy!',
-                html:`<h1>Solicitação de recuperação de senha E-commerce</h1>`
-            })
-            } catch (error) {
+               client.messages.create(process.env.MAILGUN_HOST!, {
+                from: process.env.MAILGUN_FROM,
+                to: [email],
+                subject: "Recuperação de senha E-commerce",
+                text: "Testing some Mailgun awesomeness!",
+                html: "<h1>Testing some Mailgun awesomeness!</h1>"
+                })
+                .then(msg => console.log(msg)) // logs response data
+                .catch(err => console.log(err));
+            } 
+            catch (error) {
                 reply.send(error)
                 throw new Error("Houve um erro ao realizar a recuperação de senha")
             }
-        }
-        else {
-            throw new Error("O email fornecido não está cadastrado no banco de dados!")
-        }
-        
+        // }
+        // else {
+        //     throw new Error("O email fornecido não está cadastrado no banco de dados!")
+        // }
     })
 }
