@@ -5,13 +5,13 @@ import { AuthService } from "../auth/auth.usecase";
 import nodemailer from "nodemailer"
 import Mailgun from "mailgun.js";
 import formData from "form-data"
+import crypto from "crypto"
 
 export async function UsuarioRoutes(fastify:FastifyInstance) {
 
     const usuarioUseCase = new UsuarioUseCase();
     const authService = new AuthService();
-   
-
+    let verifyCode :string ;
     const mailgun = new Mailgun(formData);
     const client = mailgun.client({username: 'api', key: process.env.MAILGUN_API_KEY!});
 
@@ -73,8 +73,8 @@ export async function UsuarioRoutes(fastify:FastifyInstance) {
 
     fastify.post<{Params:{email:string}}>('/recuperacao/:email', async(req, reply) => {
         const {email} = req.params;
-
-        const emailExiste = await usuarioUseCase.findByEmail(email);
+        verifyCode = Math.random().toString(36).slice(-8);
+        // const emailExiste = await usuarioUseCase.findByEmail(email);
         // if (emailExiste) {
             try {
                client.messages.create(process.env.MAILGUN_HOST!, {
@@ -82,7 +82,7 @@ export async function UsuarioRoutes(fastify:FastifyInstance) {
                 to: [email],
                 subject: "Recuperação de senha E-commerce",
                 text: "Testing some Mailgun awesomeness!",
-                html: "<h1>Testing some Mailgun awesomeness!</h1>"
+                html: `<h1>O seu código de recuperação é ${verifyCode}!</h1>`
                 })
                 .then(msg => console.log(msg)) // logs response data
                 .catch(err => console.log(err));
@@ -95,5 +95,16 @@ export async function UsuarioRoutes(fastify:FastifyInstance) {
         // else {
         //     throw new Error("O email fornecido não está cadastrado no banco de dados!")
         // }
+    })
+
+    fastify.post<{Params:{codigo:string}}>('/recuperacao/verificacao/:codigo', async(req, reply) => {
+        const {codigo} = req.params;
+
+        if (codigo === verifyCode) {
+            return reply.send("Sucesso!")
+        }
+        
+        throw new Error("Código de verificação incorreto")
+        
     })
 }
