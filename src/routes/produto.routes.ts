@@ -45,7 +45,7 @@ export async function ProdutoRoutes(fastify: FastifyInstance) {
         }
     })
 
-    fastify.get<{Params: {categoria:string}}>("/:categoria", async(req,reply) => {
+    fastify.get<{Params: {categoria:string}}>("/categorias/:categoria", async(req,reply) => {
         const {categoria} = req.params;
         const lowerCaseCategoria = categoria.toLowerCase()
         try {
