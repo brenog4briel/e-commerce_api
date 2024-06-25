@@ -5,7 +5,7 @@ export async function authMiddleware(req:FastifyRequest,reply:FastifyReply) {
     
     const authService = new AuthService();
     // Postman
-    const {token}  = req.headers;
+    const {token}:any  = req.headers;
     
     if (!token) {throw new Error("Você não tem permissão para acessar essa rota!")}
     const isAuth = await authService.verifyToken(token);
