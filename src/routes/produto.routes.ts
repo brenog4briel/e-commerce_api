@@ -6,13 +6,12 @@ import { authMiddleware } from "../middlewares/auth.middleware";
 export async function ProdutoRoutes(fastify: FastifyInstance) {
 
     const produtoUseCase = new ProdutoUseCase();
-    fastify.addHook("preHandler",authMiddleware);
 
     fastify.get("/",(req,reply) => {
         reply.send("Olá")
     })
 
-    fastify.post<{Body: ProdutoData}>("/", async(req,reply) => {
+    fastify.post<{Body: ProdutoData}>("/",{preHandler:[authMiddleware]},async(req,reply) => {
         try {
             const result = await produtoUseCase.create(req.body);
             return reply.send(result);
@@ -22,7 +21,7 @@ export async function ProdutoRoutes(fastify: FastifyInstance) {
         }
     })
     
-    fastify.put<{Body: {nome:string,preco:number,proprietario:string,qtd_estoque:number,categoria:string,imagem:string}; Params:{produto_id:string}}>('/:produto_id',async(req,reply) => {
+    fastify.put<{Body: {nome:string,preco:number,proprietario:string,qtd_estoque:number,categoria:string,imagem:string}; Params:{produto_id:string}}>('/:produto_id',{preHandler:[authMiddleware]},async(req,reply) => {
         const produto_id = req.params.produto_id;
         const {nome,preco,proprietario,qtd_estoque,categoria,imagem} = req.body;
 
@@ -35,7 +34,7 @@ export async function ProdutoRoutes(fastify: FastifyInstance) {
         }
     })
 
-    fastify.delete<{Params:{produto_id:string}}>("/:produto_id",async(req,reply) => {
+    fastify.delete<{Params:{produto_id:string}}>("/:produto_id",{preHandler:[authMiddleware]},async(req,reply) => {
         const {produto_id} = req.params;
         try {
             const result = await produtoUseCase.delete(produto_id);
