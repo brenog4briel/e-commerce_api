@@ -25,7 +25,7 @@ export interface ProdutoRepository {
     create(data:ProdutoData): Promise<Produto>
     update({produto_id,nome,preco,proprietario,qtd_estoque,categoria}:Produto): Promise<Produto>
     findAll(proprietario:string): Promise<Produto[] | null>;
-    findOne(nome:string,proprietario:string): Promise<Produto | null>
+    findOne(produto_id:string): Promise<Produto | null>
     delete(produto_id:string): Promise<boolean>
     listByCategories(categoria:string):Promise<Produto[] | null>
     listAllProducts(pagina:number): Promise<Produto[] | null>

@@ -54,14 +54,9 @@ class ProdutoRepositoryPrisma implements ProdutoRepository {
         return result || null;
     }
 
-    async findOne(nome:string,proprietario:string): Promise<Produto | null> {
+    async findOne(produto_id:string): Promise<Produto | null> {
          const result = await prisma.produto.findFirst({
-            where:{
-               OR:[
-                {nome},
-                {proprietario}
-               ]
-            }
+            where:{produto_id}
         })
             
         return result || null;

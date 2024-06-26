@@ -37,8 +37,8 @@ class ProdutoUseCase {
         return result || null;
     }
 
-    async findOne(nome:string,proprietario:string): Promise<Produto | null>{
-        const result = await this.produtoRepository.findOne(nome,proprietario);
+    async findOne(produto_id:string): Promise<Produto | null>{
+        const result = await this.produtoRepository.findOne(produto_id);
         return result || null;
     }   
     

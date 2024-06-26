@@ -34,6 +34,16 @@ export async function ProdutoRoutes(fastify: FastifyInstance) {
         }
     })
 
+    fastify.get<{Params:{produto_id:string}}>("/produto/:produto_id",async(req,reply) => {
+        const {produto_id} = req.params;
+        try {
+            const result = await produtoUseCase.findOne(produto_id);
+            return reply.send(result);
+        } catch (error) {
+            throw new Error("Houve um erro ao resgatar o produto")
+        }
+    })
+
     fastify.delete<{Params:{produto_id:string}}>("/:produto_id",{preHandler:[authMiddleware]},async(req,reply) => {
         const {produto_id} = req.params;
         try {
