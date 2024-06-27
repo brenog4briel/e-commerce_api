@@ -85,6 +85,16 @@ class ProdutoRepositoryPrisma implements ProdutoRepository {
         })
         return result
     }
+
+    async listProductsByOwner(proprietario: string): Promise<Produto[] | null> {
+        const result = await prisma.produto.findMany({
+            where:{
+                proprietario
+            }
+        })
+
+        return result || null
+    }
     
 }
 
