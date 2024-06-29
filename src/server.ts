@@ -34,5 +34,5 @@ app.register(cors,{
 })
 
 app.listen({host:"0.0.0.0",port:process.env.PORT? Number(process.env.PORT) : 4000 }, () => {
-  console.log("The server is running in port 3500");
+  console.log(`The server is running in port ${process.env.PORT}`);
 });
