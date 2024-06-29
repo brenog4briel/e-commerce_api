@@ -24,7 +24,7 @@ export async function CompraRoutes(fastify:FastifyInstance) {
         }
     })
 
-    fastify.put<{Body:{pedido_de_compra_id:string,produto: ProdutoData}}>("/",async(req,reply) => { 
+    fastify.put<{Body:{pedido_de_compra_id:string,produto: ProdutoData}}>("/adiciona-produto",async(req,reply) => { 
         const {pedido_de_compra_id,produto} = req.body;
         try {
             const result = await pedido_de_compra.adicionaProduto(pedido_de_compra_id,produto);
@@ -35,7 +35,7 @@ export async function CompraRoutes(fastify:FastifyInstance) {
         }
     })
 
-    fastify.put<{Body:{pedido_de_compra_id:string,produto_id: string}}>("/",async(req,reply) => { 
+    fastify.put<{Body:{pedido_de_compra_id:string,produto_id: string}}>("/remove-produto",async(req,reply) => { 
         const {pedido_de_compra_id,produto_id} = req.body;
         try {
             const result = await pedido_de_compra.removeProduto(pedido_de_compra_id,produto_id);

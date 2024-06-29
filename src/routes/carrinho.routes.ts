@@ -22,7 +22,7 @@ export async function CarrinhoRoutes(fastify:FastifyInstance) {
         }
     })
 
-    fastify.put<{Body: {lista_de_desejos_id:string, produto:ProdutoData}}>("/",{preHandler:[authMiddleware]},async(req,reply) => {
+    fastify.put<{Body: {lista_de_desejos_id:string, produto:ProdutoData}}>("/adiciona-produto",{preHandler:[authMiddleware]},async(req,reply) => {
         const {lista_de_desejos_id,produto} = req.body;
         try {
             const result = await lista_de_desejos_Usecase.adicionaProduto(lista_de_desejos_id,produto);
@@ -32,7 +32,7 @@ export async function CarrinhoRoutes(fastify:FastifyInstance) {
         }
     })
 
-    fastify.put<{Body: {lista_de_desejos_id:string, produto_id:string}}>("/",{preHandler:[authMiddleware]},async(req,reply) => {
+    fastify.put<{Body: {lista_de_desejos_id:string, produto_id:string}}>("/remove-produto",{preHandler:[authMiddleware]},async(req,reply) => {
         const {lista_de_desejos_id,produto_id} = req.body;
         try {
             const result = await lista_de_desejos_Usecase.removeProduto(lista_de_desejos_id,produto_id);
