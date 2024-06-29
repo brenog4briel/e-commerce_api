@@ -1,7 +1,7 @@
 import { Pedido_de_compra } from "@prisma/client";
 import { Pedido_de_compra_RepositoryPrisma } from "../repository/pedido_de_compra_repository";
-import { Pedido_de_compra_Data } from "../interfaces/pedido_de_compra.interface";
 import { ProdutoData } from "../interfaces/produto.interface";
+import { Usuario } from "../interfaces/usuario.interface";
 
 class Pedido_de_compra_UseCase {
     
@@ -11,13 +11,18 @@ class Pedido_de_compra_UseCase {
         this.pedido_de_compra_repository = new Pedido_de_compra_RepositoryPrisma()
     }
 
-     async create(pedido_de_compra: Pedido_de_compra_Data): Promise<Pedido_de_compra> {
-        const data = await this.pedido_de_compra_repository.create(pedido_de_compra);
+     async create(usuario: Usuario): Promise<Pedido_de_compra> {
+        const data = await this.pedido_de_compra_repository.create(usuario);
         return data;
     }
 
-     async adicionaProduto(pedido_de_compra_id:string,produtos: ProdutoData[]): Promise<Pedido_de_compra> {
-        const data = await this.pedido_de_compra_repository.adicionaProdutos(pedido_de_compra_id,produtos);
+     async adicionaProduto(pedido_de_compra_id:string,produto: ProdutoData): Promise<Pedido_de_compra> {
+        const data = await this.pedido_de_compra_repository.adicionaProdutos(pedido_de_compra_id,produto);
+        return data;
+    }
+
+    async removeProduto(pedido_de_compra_id:string,produto_id: string): Promise<Pedido_de_compra> {
+        const data = await this.pedido_de_compra_repository.removeProdutos(pedido_de_compra_id,produto_id);
         return data;
     }
 }

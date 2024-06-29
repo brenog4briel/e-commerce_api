@@ -6,15 +6,8 @@ export interface Lista_de_desejos {
     preco_acumulado: number;
     produto?: Produto[];
 }
-
-export interface Lista_de_desejos_Data {
-    usuario_id: string;
-    preco_acumulado: number;
-    produto: Produto[];
-}
-
-
 export interface Lista_de_desejos_Repository {
-    create(Lista_de_desejos: Lista_de_desejos_Data): Promise<Lista_de_desejos>
-    adicionaProdutos(pedido_de_compra_id:string,produtos:ProdutoData[]) : Promise<Lista_de_desejos>
+    create(usuario_id:string): Promise<Lista_de_desejos>
+    adicionaProdutos(lista_de_desejos_id:string, produto:ProdutoData) : Promise<Lista_de_desejos>
+    removeProduto(lista_de_desejos_id:string,produto_id:string) : Promise<Lista_de_desejos>
 }

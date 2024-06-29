@@ -2,14 +2,15 @@ import { FastifyInstance } from "fastify";
 import { UsuarioData, Usuario } from "../interfaces/usuario.interface";
 import { UsuarioUseCase } from "../usecases/usuario.usecase";
 import { AuthService } from "../auth/auth.usecase";
-import nodemailer from "nodemailer"
 import Mailgun from "mailgun.js";
 import formData from "form-data"
-import crypto from "crypto"
+import { Lista_de_desejos_Usecase } from "../usecases/lista_de_desejos_usecase";
 
 export async function UsuarioRoutes(fastify:FastifyInstance) {
 
     const usuarioUseCase = new UsuarioUseCase();
+    const listaDeDesejosUseCase = new Lista_de_desejos_Usecase();
+
     const authService = new AuthService();
     let verifyCode :string ;
     const mailgun = new Mailgun(formData);
@@ -18,16 +19,6 @@ export async function UsuarioRoutes(fastify:FastifyInstance) {
     fastify.get("/",(req,reply) => {
         reply.send("Olá!")
     })
-
-    // fastify.get<{Params:{usuario_id:string}}>("/id=:usuario_id",async(req,reply) => {
-    //     const {usuario_id} = req.params;
-    //     try {
-    //         const data = await usuarioUseCase.findEmailById(usuario_id);
-    //         return reply.send(data)
-    //     } catch (error) {
-    //         throw new Error("Houve um erro ao criar o usuário")
-    //     }
-    // })
 
     fastify.get<{Params:{email:string}}>("/usuario/:email",async(req,reply) => {
         const {email} = req.params;
@@ -42,6 +33,7 @@ export async function UsuarioRoutes(fastify:FastifyInstance) {
     fastify.post<{Body:UsuarioData}>("/",async(req,reply) => {
         try {
             const data = await usuarioUseCase.create(req.body);
+            const list = await listaDeDesejosUseCase.create(data.usuario_id);
             return reply.send(data)
         } catch (error) {
             throw new Error("Houve um erro ao criar o usuário")
