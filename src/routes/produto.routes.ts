@@ -76,10 +76,11 @@ export async function ProdutoRoutes(fastify: FastifyInstance) {
     })
 
     
-    fastify.get<{Params:{proprietario:string}}>("/:proprietario", async(req,reply) => {
+    fastify.get<{Params:{proprietario:string}}>("/proprietario/:proprietario", async(req,reply) => {
         const {proprietario} = req.params;
         try {
             const result = await produtoUseCase.listProductsByOwner(proprietario)
+            return reply.send(result)
         } catch (error) {
             throw new Error("Houve um erro ao resgatar os itens cadastrados por esse proprietário")
         }
