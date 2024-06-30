@@ -3,16 +3,16 @@ import { ProdutoData, Produto, ProdutoRepository } from "../interfaces/produto.i
 
 class ProdutoRepositoryPrisma implements ProdutoRepository {
 
-    async create({nome,preco,proprietario,qtd_estoque,usuario_id,categoria,imagem}: ProdutoData): Promise<Produto> {
+    async create({nome,preco,proprietario,qtd_estoque,categoria,imagem,usuario_id}: ProdutoData): Promise<Produto> {
         const result = await prisma.produto.create({
             data:{
                 nome,
                 preco,
                 proprietario,
                 qtd_estoque,
-                usuario_id,
                 categoria,
-                imagem
+                imagem,
+                usuario_id,
             }
         })
         return result
