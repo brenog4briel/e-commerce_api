@@ -4,7 +4,7 @@ import { AuthService } from "../auth/auth.usecase";
 export async function authMiddleware(req:FastifyRequest,reply:FastifyReply) {
     
     const authService = new AuthService();
-
+    
     const tokenReceived : string = req.headers.authorization!;
     if (!tokenReceived) {throw new Error("Você não tem permissão para acessar essa rota!")}
     const tokenFormatted = tokenReceived.slice(7,tokenReceived.length)

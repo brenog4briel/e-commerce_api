@@ -6,7 +6,7 @@ import 'dotenv/config'
 import cors from "@fastify/cors"
 import { UploadRoutes } from "./routes/upload.routes";
 import Multer from "fastify-multer"
-import { CarrinhoRoutes } from "./routes/carrinho.routes";
+import { Lista_de_desejos } from "./routes/lista_de_desejos";
 
 const app: FastifyInstance = fastify();
 
@@ -28,8 +28,8 @@ app.register(CompraRoutes, {
   prefix:"/compra"
 })
 
-app.register(CarrinhoRoutes,{
-  prefix:"/carrinho"
+app.register(Lista_de_desejos,{
+  prefix:"/lista_de_desejos"
 })
 
 app.register(cors,{
