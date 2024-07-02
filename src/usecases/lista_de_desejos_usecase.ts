@@ -24,6 +24,11 @@ class Lista_de_desejos_Usecase {
         const data = await this.lista_de_desejos_repository.removeProduto(lista_de_desejos_id,produto_id);
         return data;
     }
+    
+    async getListIdByUserId(usuario_id:string) : Promise<string | null> {
+        const data = await this.lista_de_desejos_repository.getListIdByUserId(usuario_id)
+        return data;
+    }
 }
 
 export {Lista_de_desejos_Usecase}

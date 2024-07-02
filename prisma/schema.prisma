@@ -30,6 +30,7 @@ model Usuario {
 model Lista_de_desejos {
   lista_de_desejos_id String @default(uuid()) @id
   preco_acumulado Float
+  total_de_produtos Int
   usuario Usuario @relation(fields: [usuario_id],references: [usuario_id])
   usuario_id String @unique
   produtos Produto[]

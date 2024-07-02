@@ -6,7 +6,7 @@ import 'dotenv/config'
 import cors from "@fastify/cors"
 import { UploadRoutes } from "./routes/upload.routes";
 import Multer from "fastify-multer"
-import { Lista_de_desejos } from "./routes/lista_de_desejos";
+import { Lista_de_desejos } from "./routes/lista_de_desejos.routes";
 
 const app: FastifyInstance = fastify();
 
