@@ -47,7 +47,7 @@ export async function UsuarioRoutes(fastify:FastifyInstance) {
             const data = await usuarioUseCase.updateUserInfo(usuario_id,nome,endereco,CEP);
             return reply.send(data)
         } catch (error) {
-            throw new Error("Houve um erro ao atualizar o usuário")
+            throw new Error("Houve um erro ao atualizar as informações do usuário")
 
         }
     })

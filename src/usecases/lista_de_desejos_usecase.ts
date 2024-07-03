@@ -1,4 +1,4 @@
-import { ProdutoData } from "../interfaces/produto.interface";
+import { Produto, ProdutoData } from "../interfaces/produto.interface";
 import { Lista_de_desejos_Prisma } from "../repository/lista_de_desejos_repository";
 import { Lista_de_desejos } from "../interfaces/lista_de_desejos.interface";
 
@@ -20,8 +20,8 @@ class Lista_de_desejos_Usecase {
         return data;
     }
 
-    async removeProduto(lista_de_desejos_id:string,produto_id:string) : Promise<Lista_de_desejos> {
-        const data = await this.lista_de_desejos_repository.removeProduto(lista_de_desejos_id,produto_id);
+    async removeProduto(lista_de_desejos_id:string,produto:Produto) : Promise<Lista_de_desejos> {
+        const data = await this.lista_de_desejos_repository.removeProduto(lista_de_desejos_id,produto);
         return data;
     }
     

@@ -10,6 +10,6 @@ export interface Lista_de_desejos {
 export interface Lista_de_desejos_Repository {
     create(usuario_id:string): Promise<Lista_de_desejos>
     adicionaProdutos(lista_de_desejos_id:string, produto:ProdutoData) : Promise<Lista_de_desejos>
-    removeProduto(lista_de_desejos_id:string,produto_id:string) : Promise<Lista_de_desejos>
+    removeProduto(lista_de_desejos_id:string,produto:Produto) : Promise<Lista_de_desejos>
     getListIdByUserId(usuario_id:string): Promise<string | null>
 }

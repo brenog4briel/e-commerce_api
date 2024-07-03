@@ -1,6 +1,6 @@
 import { prisma } from "../database/prisma-client";
 import { Lista_de_desejos, Lista_de_desejos_Repository } from "../interfaces/lista_de_desejos.interface";
-import { ProdutoData } from "../interfaces/produto.interface";
+import { Produto, ProdutoData } from "../interfaces/produto.interface";
 
 class Lista_de_desejos_Prisma implements Lista_de_desejos_Repository {
     async create(usuario_id:string): Promise<Lista_de_desejos> {
@@ -26,26 +26,38 @@ class Lista_de_desejos_Prisma implements Lista_de_desejos_Repository {
                 },
                 total_de_produtos: {
                     increment:1
+                },
+                preco_acumulado:{
+                    increment: produto.preco
                 }
-            },include:
-            {produtos:false}
-            
+            },
+            include:{
+                produtos:true
+            }
         })
         return result;
     }
 
-    async removeProduto(lista_de_desejos_id: string, produto_id: string): Promise<Lista_de_desejos> {
+    async removeProduto(lista_de_desejos_id: string, produto: Produto): Promise<Lista_de_desejos> {
         const result = await prisma.lista_de_desejos.update({
-            where:{lista_de_desejos_id},
+            where:{
+                lista_de_desejos_id
+            },
             data:{
                 produtos:{
                     delete:{
-                       produto_id
-                    }
+                       produto_id: produto.produto_id
+                    },
                 },
                 total_de_produtos: {
                     decrement:1
+                },
+                preco_acumulado: {
+                    decrement: produto.preco
                 }
+            },
+            include:{
+                produtos:true
             }
         })
         return result || null;

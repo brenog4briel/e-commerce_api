@@ -29,7 +29,7 @@ export async function ProdutoRoutes(fastify: FastifyInstance) {
             const result = await produtoUseCase.update({produto_id,nome,preco,proprietario,qtd_estoque,categoria,imagem})
             return reply.send(result);
         } catch (error) {
-            throw new Error("Houve um erro ao atualizar o produto")
+            throw new Error("Houve um erro ao atualizar as informações do produto")
 
         }
     })
@@ -50,7 +50,7 @@ export async function ProdutoRoutes(fastify: FastifyInstance) {
             const result = await produtoUseCase.delete(produto_id);
             return reply.send(result);
         } catch (error) {
-            throw new Error("Houve um erro ao deletar o produto")
+            throw new Error("Houve um erro ao remover o produto")
         }
     })
 
@@ -61,7 +61,7 @@ export async function ProdutoRoutes(fastify: FastifyInstance) {
             const result = await produtoUseCase.listByCategories(lowerCaseCategoria);
             return reply.send(result);
         } catch (error) {
-            throw new Error("Houve um erro ao resgatar o produto")
+            throw new Error("Houve um erro ao resgatar os produtos desta categoria")
         }
     })
     
@@ -71,7 +71,7 @@ export async function ProdutoRoutes(fastify: FastifyInstance) {
             const result = await produtoUseCase.listAllProducts(pagina);
             return reply.send(result);
         } catch (error) {
-            throw new Error("Houve um erro ao resgatar os produto")
+            throw new Error("Houve um erro ao resgatar os produtos")
         }
     })
 
