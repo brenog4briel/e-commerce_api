@@ -33,7 +33,7 @@ export async function UsuarioRoutes(fastify:FastifyInstance) {
     fastify.post<{Body:UsuarioData}>("/",async(req,reply) => {
         try {
             const data = await usuarioUseCase.create(req.body);
-            const list = await listaDeDesejosUseCase.create(data.usuario_id);
+            // const list = await listaDeDesejosUseCase.create(data.usuario_id);
             return reply.send(data)
         } catch (error) {
             throw new Error("Houve um erro ao criar o usuário")

@@ -13,22 +13,19 @@ class UsuarioRepositoryPrisma implements UsuarioRepository {
                 email: data.email,
                 endereco: data.endereco,
                 CEP: data.CEP,
-                produtos:{},
-                lista_de_desejos:{},
-                pedido_de_compra:{},
                 imagem: ""
             }
         })
         return result;
     }
 
-    async findByEmail(email:string): Promise<Usuario | null> {
-        const result = await prisma.usuario.findFirst({
+    async findByEmail(email:string): Promise<Usuario> {
+        const result = await prisma.usuario.findFirstOrThrow({
             where:{
                 email
             }
         })
-        return result || null;
+        return result;
     }
 
     async findEmailById(usuario_id: string): Promise<string | null> {

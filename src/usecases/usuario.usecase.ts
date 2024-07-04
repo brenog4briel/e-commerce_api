@@ -7,15 +7,15 @@ class UsuarioUseCase {
         this.usuarioRepository = new UsuarioRepositoryPrisma()
     }
 
-    async create({nome,email,senha,CEP,endereco,lista_de_desejos,pedido_de_compra,produtos,imagem}:UsuarioData): Promise<Usuario> {
+    async create({nome,email,senha,CEP,endereco,imagem}:UsuarioData): Promise<Usuario> {
         const usuarioExiste = await this.usuarioRepository.findByEmail(email);
         if (usuarioExiste) {throw new Error("Usuário já cadastrado!")}
 
-        const result = await this.usuarioRepository.create({nome,email,senha,CEP,endereco,lista_de_desejos,pedido_de_compra,produtos,imagem});
+        const result = await this.usuarioRepository.create({nome,email,senha,CEP,endereco,imagem});
         return result;
     }
 
-    async findByEmail(email:string): Promise<Usuario | null> {
+    async findByEmail(email:string): Promise<Usuario> {
         const result = await this.usuarioRepository.findByEmail(email);
         return result
     }
