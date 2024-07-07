@@ -8,9 +8,6 @@ class UsuarioUseCase {
     }
 
     async create({nome,email,senha,CEP,endereco,imagem}:UsuarioData): Promise<Usuario> {
-        const usuarioExiste = await this.usuarioRepository.findByEmail(email);
-        if (usuarioExiste) {throw new Error("Usuário já cadastrado!")}
-
         const result = await this.usuarioRepository.create({nome,email,senha,CEP,endereco,imagem});
         return result;
     }

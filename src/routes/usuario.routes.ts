@@ -33,7 +33,7 @@ export async function UsuarioRoutes(fastify:FastifyInstance) {
     fastify.post<{Body:UsuarioData}>("/",async(req,reply) => {
         try {
             const data = await usuarioUseCase.create(req.body);
-            // const list = await listaDeDesejosUseCase.create(data.usuario_id);
+            const list = await listaDeDesejosUseCase.create(data.usuario_id);
             return reply.send(data)
         } catch (error) {
             throw new Error("Houve um erro ao criar o usuário")
@@ -66,8 +66,6 @@ export async function UsuarioRoutes(fastify:FastifyInstance) {
     fastify.post<{Params:{email:string}}>('/recuperacao/:email', async(req, reply) => {
         const {email} = req.params;
         verifyCode = Math.random().toString(36).slice(-8);
-        // const emailExiste = await usuarioUseCase.findByEmail(email);
-        // if (emailExiste) {
             try {
                client.messages.create(process.env.MAILGUN_HOST!, {
                 from: process.env.MAILGUN_FROM,
@@ -83,10 +81,6 @@ export async function UsuarioRoutes(fastify:FastifyInstance) {
                 reply.send(error)
                 throw new Error("Houve um erro ao realizar a recuperação de senha")
             }
-        // }
-        // else {
-        //     throw new Error("O email fornecido não está cadastrado no banco de dados!")
-        // }
     })
 
     fastify.post<{Params:{codigo:string}}>('/recuperacao/verificacao/:codigo', async(req, reply) => {

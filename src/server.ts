@@ -25,7 +25,7 @@ app.register(ProdutoRoutes,{
 })
 
 app.register(CompraRoutes, {
-  prefix:"/compra"
+  prefix:"/pedido_de_compra"
 })
 
 app.register(Lista_de_desejos,{
