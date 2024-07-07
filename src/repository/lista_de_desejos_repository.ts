@@ -1,3 +1,4 @@
+import { Pedido_de_compra } from "@prisma/client";
 import { prisma } from "../database/prisma-client";
 import { Lista_de_desejos, Lista_de_desejos_Repository } from "../interfaces/lista_de_desejos.interface";
 import { Produto, ProdutoData } from "../interfaces/produto.interface";
@@ -67,9 +68,24 @@ class Lista_de_desejos_Prisma implements Lista_de_desejos_Repository {
         const result = await prisma.lista_de_desejos.findFirst({
             where:{
                 usuario_id
+            },
+            include:{
+                produtos:true
             }
         })
     return result?.lista_de_desejos_id || null    
+    }
+
+    async getListById(lista_de_desejos_id: string): Promise<Lista_de_desejos | null> {
+        const result = await prisma.lista_de_desejos.findFirst({
+            where:{
+                lista_de_desejos_id
+            },
+            include:{
+                produtos:true
+            }
+        })
+        return result || null
     }
 }
 

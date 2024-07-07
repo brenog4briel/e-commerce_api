@@ -30,6 +30,11 @@ class Pedido_de_compra_UseCase {
         const data = await this.pedido_de_compra_repository.getPedidoIdByUserId(usuario_id)
         return data;
     }
+
+     async getPedidoById(pedido_de_compra_id: string): Promise<Pedido_de_compra | null> {
+        const data = await this.pedido_de_compra_repository.getPedidoById(pedido_de_compra_id)
+        return data;
+    }
 }
 
 export {Pedido_de_compra_UseCase}

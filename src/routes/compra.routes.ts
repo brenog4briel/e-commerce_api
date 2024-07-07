@@ -56,4 +56,15 @@ export async function CompraRoutes(fastify:FastifyInstance) {
 
         }
     })
+
+    fastify.get<{Params:{pedido_de_compra_id: string}}>("/:pedido_de_compra_id",async(req,reply) => { 
+        const {pedido_de_compra_id} = req.params;
+        try {
+            const result = await pedido_de_compra.getPedidoById(pedido_de_compra_id);
+            return reply.send(result)
+        } catch (error) {
+            throw new Error("Houve um erro ao resgatar o pedido de compra")
+
+        }
+    })
 }

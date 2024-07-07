@@ -1,3 +1,4 @@
+import { Pedido_de_compra } from "@prisma/client";
 import { Produto, ProdutoData } from "./produto.interface";
 
 export interface Lista_de_desejos {
@@ -12,4 +13,5 @@ export interface Lista_de_desejos_Repository {
     adicionaProdutos(lista_de_desejos_id:string, produto:ProdutoData) : Promise<Lista_de_desejos>
     removeProduto(lista_de_desejos_id:string,produto:Produto) : Promise<Lista_de_desejos>
     getListIdByUserId(usuario_id:string): Promise<string | null>
+    getListById(lista_de_desejos_id:string) : Promise<Lista_de_desejos | null>
 }

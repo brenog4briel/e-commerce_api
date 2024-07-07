@@ -53,4 +53,14 @@ export async function Lista_de_desejos(fastify:FastifyInstance) {
             throw new Error("Houve um erro ao resgatar a informação da lista de desejos")
         }
     })
+
+     fastify.get<{Params: {lista_de_desejos:string}}>("/:lista_de_desejos",async(req,reply) => {
+        const {lista_de_desejos} = req.params;
+        try {
+            const result = await lista_de_desejos_Usecase.getListById(lista_de_desejos);
+            return reply.send(result);
+        } catch (error) {
+            throw new Error("Houve um erro ao resgatar a lista de desejos")
+        }
+    })
 }

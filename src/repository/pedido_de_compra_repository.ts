@@ -73,6 +73,18 @@ class Pedido_de_compra_RepositoryPrisma implements Pedido_de_compra_Repository {
         return result?.pedido_de_compra_id || null
     }
 
+    async getPedidoById(pedido_de_compra_id: string): Promise<Pedido_de_compra | null> {
+        const result = await prisma.pedido_de_compra.findFirst({
+            where:{
+                pedido_de_compra_id
+            },
+            include:{
+                produtos:true
+            }
+        })
+        return result || null
+    }
+
 }
 
 export {Pedido_de_compra_RepositoryPrisma}

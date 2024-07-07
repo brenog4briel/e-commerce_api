@@ -16,5 +16,5 @@ export interface Pedido_de_compra_Repository {
     adicionaProdutos(pedido_de_compra_id:string,produtos:ProdutoData) : Promise<Pedido_de_compra>
     removeProdutos(pedido_de_compra_id:string,produto:Produto) : Promise<Pedido_de_compra>
     getPedidoIdByUserId(usuario_id:string) : Promise<string | null>
-
+    getPedidoById(pedido_de_compra_id: string): Promise<Pedido_de_compra | null>
 }
