@@ -60,7 +60,7 @@ model Pedido_de_compra {
 }
 
 model Produto {
-  produto_id String @id @default(uuid())
+  produto_id String @id @default(uuid()) @unique
   nome String
   preco Float
   proprietario String

@@ -3,7 +3,7 @@ import { authMiddleware } from "../middlewares/auth.middleware";
 import { Produto, ProdutoData } from "../interfaces/produto.interface";
 import { Historico_de_compras_Usecase } from "../usecases/historico_de_compras";
 
-export async function Historico_de_compras(fastify:FastifyInstance) {
+export async function Historico_de_comprasRoutes(fastify:FastifyInstance) {
 
     const historico_de_compras_Usecase = new Historico_de_compras_Usecase();
 

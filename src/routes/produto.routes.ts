@@ -86,17 +86,6 @@ export async function ProdutoRoutes(fastify: FastifyInstance) {
         }
     })
 
-     fastify.put<{Params:{produto_id:string},Body:{quantidade:number}}>("/atualiza-estoque/:produto_id", async(req,reply) => {
-        const {produto_id} = req.params;
-        const {quantidade} = req.body
-        try {
-            const result = await produtoUseCase.updateProductQuantity(produto_id,quantidade)
-            return reply.send(result)
-        } catch (error) {
-            throw new Error("Houve um erro ao atualizar o estoque do produto")
-        }
-    })
-
      fastify.get("/mais-vendidos", async(req,reply) => {
         try {
             const result = await produtoUseCase.getBestSellers()

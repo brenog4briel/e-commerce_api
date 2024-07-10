@@ -3,7 +3,7 @@ import { Lista_de_desejos_Usecase } from "../usecases/lista_de_desejos_usecase";
 import { authMiddleware } from "../middlewares/auth.middleware";
 import { Produto, ProdutoData } from "../interfaces/produto.interface";
 
-export async function Lista_de_desejos(fastify:FastifyInstance) {
+export async function Lista_de_desejosRoutes(fastify:FastifyInstance) {
 
     const lista_de_desejos_Usecase = new Lista_de_desejos_Usecase();
 

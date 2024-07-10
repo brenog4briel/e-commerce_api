@@ -52,20 +52,11 @@ class ProdutoUseCase {
         return result || null;
     }
 
-    async updateProductImage(produto_id:string,imagem:string) : Promise<Produto> {
-        const result = await this.produtoRepository.updateProductImage(produto_id,imagem)
-        return result;
-    }
-
      async listProductsByOwner(proprietario: string): Promise<Produto[] | null> {
         const result = await this.produtoRepository.listProductsByOwner(proprietario)
         return result || null
     }
 
-    async updateProductQuantity(produto_id: string,quantidade:number): Promise<Produto> {
-        const result = await this.produtoRepository.updateProductQuantity(produto_id,quantidade)
-        return result;
-    }
 
     async getBestSellers(): Promise<Produto[]> {
         const result = await this.produtoRepository.getBestSellers();

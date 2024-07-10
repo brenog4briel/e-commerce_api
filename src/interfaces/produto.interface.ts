@@ -31,9 +31,7 @@ export interface ProdutoRepository {
     delete(produto_id:string): Promise<boolean>
     listByCategories(categoria:string):Promise<Produto[] | null>
     listAllProducts(pagina:number): Promise<Produto[] | null>
-    updateProductImage(produto_id:string,imagem:string) : Promise<Produto>;
     listProductsByOwner(proprietario:string) : Promise<Produto[] | null>
-    updateProductQuantity(produto_id:string,quantidade:number) : Promise<Produto>
     getBestSellers() : Promise<Produto[]>
 
 }

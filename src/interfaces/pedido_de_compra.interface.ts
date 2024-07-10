@@ -13,7 +13,7 @@ export interface Pedido_de_compra {
 }
 export interface Pedido_de_compra_Repository {
     create(usuario:Usuario) : Promise<Pedido_de_compra>
-    adicionaProdutos(pedido_de_compra_id:string,produtos:ProdutoData) : Promise<Pedido_de_compra>
+    adicionaProdutos(pedido_de_compra_id:string,produtos:Produto) : Promise<Pedido_de_compra | null>
     removeProdutos(pedido_de_compra_id:string,produto:Produto) : Promise<Pedido_de_compra>
     getPedidoIdByUserId(usuario_id:string) : Promise<string | null>
     getPedidoById(pedido_de_compra_id: string): Promise<Pedido_de_compra | null>

@@ -1,6 +1,6 @@
 import { Pedido_de_compra } from "@prisma/client";
 import { Pedido_de_compra_RepositoryPrisma } from "../repository/pedido_de_compra_repository";
-import { Produto, ProdutoData } from "../interfaces/produto.interface";
+import { Produto } from "../interfaces/produto.interface";
 import { Usuario } from "../interfaces/usuario.interface";
 
 class Pedido_de_compra_UseCase {
@@ -16,7 +16,7 @@ class Pedido_de_compra_UseCase {
         return data;
     }
 
-     async adicionaProduto(pedido_de_compra_id:string,produto: ProdutoData): Promise<Pedido_de_compra> {
+     async adicionaProduto(pedido_de_compra_id:string,produto: Produto): Promise<Pedido_de_compra | null> {
         const data = await this.pedido_de_compra_repository.adicionaProdutos(pedido_de_compra_id,produto);
         return data;
     }

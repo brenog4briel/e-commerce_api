@@ -12,25 +12,25 @@ class ProdutoRepositoryPrisma implements ProdutoRepository {
                 qtd_estoque,
                 categoria,
                 imagem,
-                numero_vendas:0,
+                numero_vendas,
                 usuario_id,
             }
         })
         return result
     }
 
-    async update({produto_id,nome,preco,proprietario,qtd_estoque,categoria,imagem}: Produto): Promise<Produto> {
+    async update({produto_id,nome,preco,proprietario,categoria,imagem}: Produto): Promise<Produto> {
         const result = await prisma.produto.update({
             where:{
                 produto_id,
             },
             data: {
-                nome,
-                preco,
-                proprietario,
-                qtd_estoque,
-                categoria,
-                imagem
+                nome: nome || undefined,
+                preco: preco || undefined,
+                proprietario: proprietario || undefined,
+                categoria: categoria || undefined,
+                imagem: imagem || undefined,
+  
             }
         })
         return result;
@@ -79,14 +79,6 @@ class ProdutoRepositoryPrisma implements ProdutoRepository {
         return result || null
     }
 
-    async updateProductImage(produto_id: string, imagem: string): Promise<Produto> {
-        const result = await prisma.produto.update({
-            where: {produto_id:produto_id},
-            data:{imagem: imagem}
-        })
-        return result
-    }
-
     async listProductsByOwner(proprietario: string): Promise<Produto[] | null> {
         const result = await prisma.produto.findMany({
             where:{
@@ -95,18 +87,6 @@ class ProdutoRepositoryPrisma implements ProdutoRepository {
         })
 
         return result || null
-    }
-
-    async updateProductQuantity(produto_id: string,quantidade:number): Promise<Produto> {
-        const result = await prisma.produto.update({
-            where:{produto_id},
-            data:{
-                qtd_estoque: {
-                    increment: quantidade
-                }
-            }
-        })
-        return result
     }
 
     async getBestSellers(): Promise<Produto[]> {
