@@ -1,11 +1,10 @@
-import { Pedido_de_compra } from "@prisma/client";
 import { Produto, ProdutoData } from "./produto.interface";
 
 export interface Lista_de_desejos {
     lista_de_desejos_id: string
     usuario_id: string;
     preco_acumulado: number;
-    total_de_produtos: Number
+    total_de_produtos: number
     produto?: Produto[];
 }
 export interface Lista_de_desejos_Repository {

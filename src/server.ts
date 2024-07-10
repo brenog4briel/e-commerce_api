@@ -7,6 +7,7 @@ import cors from "@fastify/cors"
 import { UploadRoutes } from "./routes/upload.routes";
 import Multer from "fastify-multer"
 import { Lista_de_desejos } from "./routes/lista_de_desejos.routes";
+import { Historico_de_compras } from "./routes/historico_de_compras.routes";
 
 const app: FastifyInstance = fastify();
 
@@ -30,6 +31,10 @@ app.register(CompraRoutes, {
 
 app.register(Lista_de_desejos,{
   prefix:"/lista_de_desejos"
+})
+
+app.register(Historico_de_compras,{
+  prefix:"/historico_de_compras"
 })
 
 app.register(cors,{

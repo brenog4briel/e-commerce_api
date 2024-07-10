@@ -1,4 +1,3 @@
-import { Pedido_de_compra } from "@prisma/client";
 import { prisma } from "../database/prisma-client";
 import { Lista_de_desejos, Lista_de_desejos_Repository } from "../interfaces/lista_de_desejos.interface";
 import { Produto, ProdutoData } from "../interfaces/produto.interface";

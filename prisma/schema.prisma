@@ -22,10 +22,20 @@ model Usuario {
   atualizadoEm DateTime @updatedAt
 
   produtos Produto[]
+  historico_de_compras Historico_de_compras?
   lista_de_desejos Lista_de_desejos?
   pedido_de_compra Pedido_de_compra[]
 }
 
+model Historico_de_compras {
+  historico_de_compras_id String @default(uuid()) @id
+  total_de_aquisicoes Int 
+  preco_total_gasto Float
+
+  usuario Usuario @relation(fields: [usuario_id],references: [usuario_id])
+  usuario_id String @unique
+  produtos Produto[]
+}
 
 model Lista_de_desejos {
   lista_de_desejos_id String @default(uuid()) @id
@@ -66,4 +76,6 @@ model Produto {
   pedido_de_compra_id String? 
   lista_de_desejos Lista_de_desejos? @relation(fields: [lista_de_desejos_id],references: [lista_de_desejos_id])
   lista_de_desejos_id String? 
+  historico_de_compras Historico_de_compras? @relation(fields: [historico_de_compras_id],references: [historico_de_compras_id])
+  historico_de_compras_id String? 
 }

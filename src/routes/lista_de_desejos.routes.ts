@@ -54,10 +54,10 @@ export async function Lista_de_desejos(fastify:FastifyInstance) {
         }
     })
 
-     fastify.get<{Params: {lista_de_desejos:string}}>("/:lista_de_desejos",async(req,reply) => {
-        const {lista_de_desejos} = req.params;
+     fastify.get<{Params: {lista_de_desejos_id:string}}>("/:lista_de_desejos",async(req,reply) => {
+        const {lista_de_desejos_id} = req.params;
         try {
-            const result = await lista_de_desejos_Usecase.getListById(lista_de_desejos);
+            const result = await lista_de_desejos_Usecase.getListById(lista_de_desejos_id);
             return reply.send(result);
         } catch (error) {
             throw new Error("Houve um erro ao resgatar a lista de desejos")
