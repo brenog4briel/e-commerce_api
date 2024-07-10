@@ -61,6 +61,16 @@ class ProdutoUseCase {
         const result = await this.produtoRepository.listProductsByOwner(proprietario)
         return result || null
     }
+
+    async updateProductQuantity(produto_id: string,quantidade:number): Promise<Produto> {
+        const result = await this.produtoRepository.updateProductQuantity(produto_id,quantidade)
+        return result;
+    }
+
+    async getBestSellers(): Promise<Produto[]> {
+        const result = await this.produtoRepository.getBestSellers();
+        return result;
+    }
 }
 
 export {ProdutoUseCase}

@@ -64,6 +64,7 @@ model Produto {
   nome String
   preco Float
   proprietario String
+  numero_vendas Int
   imagem String @db.VarChar(1000)
   qtd_estoque Int
   categoria String

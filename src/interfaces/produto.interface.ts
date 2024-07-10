@@ -6,6 +6,7 @@ export interface Produto {
     qtd_estoque: number;
     categoria: string;
     imagem:string;
+    numero_vendas?:number;
     usuario_id?: string;
     criadoEm?: Date;
     atualizadoEm?: Date;
@@ -31,5 +32,7 @@ export interface ProdutoRepository {
     listAllProducts(pagina:number): Promise<Produto[] | null>
     updateProductImage(produto_id:string,imagem:string) : Promise<Produto>;
     listProductsByOwner(proprietario:string) : Promise<Produto[] | null>
+    updateProductQuantity(produto_id:string,quantidade:number) : Promise<Produto>
+    getBestSellers() : Promise<Produto[]>
 
 }

@@ -95,6 +95,28 @@ class ProdutoRepositoryPrisma implements ProdutoRepository {
 
         return result || null
     }
+
+    async updateProductQuantity(produto_id: string,quantidade:number): Promise<Produto> {
+        const result = await prisma.produto.update({
+            where:{produto_id},
+            data:{
+                qtd_estoque: {
+                    increment: quantidade
+                }
+            }
+        })
+        return result
+    }
+
+    async getBestSellers(): Promise<Produto[]> {
+        const result = await prisma.produto.findMany({
+            orderBy:{
+                qtd_estoque:"desc"
+            },
+            take:10
+        })
+        return result;
+    }
     
 }
 
