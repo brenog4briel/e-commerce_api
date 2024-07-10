@@ -18,6 +18,7 @@ export interface ProdutoData {
     proprietario: string;
     categoria:string;
     qtd_estoque: number;
+    numero_vendas:number;
     imagem:string;
     usuario_id: string;
 }

@@ -8,8 +8,8 @@ class ProdutoUseCase {
 
     }
 
-    async create({nome,preco,proprietario,qtd_estoque,categoria,imagem,usuario_id}: ProdutoData) : Promise<Produto> {
-        const result = await this.produtoRepository.create({nome,preco,proprietario,qtd_estoque,usuario_id,categoria,imagem});
+    async create({nome,preco,proprietario,qtd_estoque,categoria,numero_vendas,imagem,usuario_id}: ProdutoData) : Promise<Produto> {
+        const result = await this.produtoRepository.create({nome,preco,proprietario,qtd_estoque,usuario_id,categoria,numero_vendas,imagem});
         return result;
     }
 
