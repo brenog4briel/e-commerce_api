@@ -25,13 +25,8 @@ class Lista_de_desejos_Usecase {
         return data;
     }
     
-    async getListIdByUserId(usuario_id:string) : Promise<string | null> {
-        const data = await this.lista_de_desejos_repository.getListIdByUserId(usuario_id)
-        return data;
-    }
-
-    async getListById(lista_de_desejos_id: string): Promise<Lista_de_desejos | null> {
-        const data = await this.lista_de_desejos_repository.getListById(lista_de_desejos_id)
+    async getListByUserId(usuario_id: string): Promise<Lista_de_desejos | null> {
+        const data = await this.lista_de_desejos_repository.getListByUserId(usuario_id)
         return data;
     }
 }

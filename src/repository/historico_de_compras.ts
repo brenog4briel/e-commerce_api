@@ -9,7 +9,8 @@ class Historico_de_compras_Prisma implements Historico_de_compras_Repository {
                 usuario_id: usuario_id,
                 total_de_aquisicoes: 0, 
                 preco_total_gasto: 0,
-                produtos: {}
+                produtos: {},
+                
             }
         });
         return result;
@@ -38,22 +39,10 @@ class Historico_de_compras_Prisma implements Historico_de_compras_Repository {
         return result;
     }
 
-   async getListIdByUserId(usuario_id: string): Promise<string | null> {
+    async getListByUserId(usuario_id: string): Promise<Historico_de_compras | null> {
         const result = await prisma.historico_de_compras.findFirst({
             where:{
                 usuario_id
-            },
-            include:{
-                produtos:true
-            }
-        })
-    return result?.historico_de_compras_id || null    
-    }
-
-    async getListById(historico_de_compras_id: string): Promise<Historico_de_compras | null> {
-        const result = await prisma.historico_de_compras.findFirst({
-            where:{
-                historico_de_compras_id
             },
             include:{
                 produtos:true

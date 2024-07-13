@@ -19,13 +19,8 @@ class Historico_de_compras_Usecase {
         return data;
     }
 
-    async getListIdByUserId(usuario_id:string) : Promise<string | null> {
-        const data = await this.historico_de_compras_repository.getListIdByUserId(usuario_id)
-        return data;
-    }
-
-    async getListById(historico_de_compras_id: string): Promise<Historico_de_compras | null> {
-        const data = await this.historico_de_compras_repository.getListById(historico_de_compras_id)
+    async getListByUserId(usuario_id: string): Promise<Historico_de_compras | null> {
+        const data = await this.historico_de_compras_repository.getListByUserId(usuario_id)
         return data;
     }
 }

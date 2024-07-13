@@ -63,22 +63,10 @@ class Lista_de_desejos_Prisma implements Lista_de_desejos_Repository {
         return result || null;
     }
 
-   async getListIdByUserId(usuario_id: string): Promise<string | null> {
+    async getListByUserId(usuario_id: string): Promise<Lista_de_desejos | null> {
         const result = await prisma.lista_de_desejos.findFirst({
             where:{
                 usuario_id
-            },
-            include:{
-                produtos:true
-            }
-        })
-    return result?.lista_de_desejos_id || null    
-    }
-
-    async getListById(lista_de_desejos_id: string): Promise<Lista_de_desejos | null> {
-        const result = await prisma.lista_de_desejos.findFirst({
-            where:{
-                lista_de_desejos_id
             },
             include:{
                 produtos:true

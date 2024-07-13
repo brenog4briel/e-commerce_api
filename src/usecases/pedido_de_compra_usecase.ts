@@ -26,13 +26,8 @@ class Pedido_de_compra_UseCase {
         return data;
     }
 
-    async getPedidoIdByUserId(usuario_id:string) : Promise<string | null> {
-        const data = await this.pedido_de_compra_repository.getPedidoIdByUserId(usuario_id)
-        return data;
-    }
-
-     async getPedidoById(pedido_de_compra_id: string): Promise<Pedido_de_compra | null> {
-        const data = await this.pedido_de_compra_repository.getPedidoById(pedido_de_compra_id)
+    async getPedidoByUserId(usuario_id: string): Promise<Pedido_de_compra | null> {
+        const data = await this.pedido_de_compra_repository.getPedidoByUserId(usuario_id)
         return data;
     }
 }

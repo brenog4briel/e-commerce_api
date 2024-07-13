@@ -47,20 +47,11 @@ export async function Lista_de_desejosRoutes(fastify:FastifyInstance) {
     fastify.get<{Params: {usuario_id:string}}>("/lista/:usuario_id",async(req,reply) => {
         const {usuario_id} = req.params;
         try {
-            const result = await lista_de_desejos_Usecase.getListIdByUserId(usuario_id);
+            const result = await lista_de_desejos_Usecase.getListByUserId(usuario_id);
             return reply.send(result);
         } catch (error) {
             throw new Error("Houve um erro ao resgatar a informação da lista de desejos")
         }
     })
 
-     fastify.get<{Params: {lista_de_desejos_id:string}}>("/:lista_de_desejos",async(req,reply) => {
-        const {lista_de_desejos_id} = req.params;
-        try {
-            const result = await lista_de_desejos_Usecase.getListById(lista_de_desejos_id);
-            return reply.send(result);
-        } catch (error) {
-            throw new Error("Houve um erro ao resgatar a lista de desejos")
-        }
-    })
 }
