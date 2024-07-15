@@ -1,6 +1,6 @@
 import { prisma } from "../database/prisma-client";
 import { Historico_de_compras, Historico_de_compras_Repository } from "../interfaces/historico_de_compras";
-import { ProdutoData } from "../interfaces/produto.interface";
+import { Produto } from "../interfaces/produto.interface";
 
 class Historico_de_compras_Prisma implements Historico_de_compras_Repository {
     async create(usuario_id:string): Promise<Historico_de_compras> {
@@ -16,16 +16,14 @@ class Historico_de_compras_Prisma implements Historico_de_compras_Repository {
         return result;
     }
 
-    async adicionaProdutos(historico_de_compras_id:string,produto: ProdutoData): Promise<Historico_de_compras> {
+    async adicionaProdutos(historico_de_compras_id:string,produto: Produto): Promise<Historico_de_compras> {
         const result = await prisma.historico_de_compras.update({
             where:{
                 historico_de_compras_id: historico_de_compras_id
             },
             data:{
                 produtos:{
-                    createMany:{
-                        data:[produto]
-                    }
+                   connect:[{produto_id:produto.produto_id}]
                 },
                 total_de_aquisicoes:{
                     increment:1

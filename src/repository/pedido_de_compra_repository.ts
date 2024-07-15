@@ -35,9 +35,7 @@ class Pedido_de_compra_RepositoryPrisma implements Pedido_de_compra_Repository {
             },
             data:{
                 produtos:{
-                    createMany:{
-                        data:[produtoData]
-                    }
+                    connect:[{produto_id:produto.produto_id}]       
                 },
                 total_a_pagar:{
                     increment:produto.preco
@@ -69,6 +67,9 @@ class Pedido_de_compra_RepositoryPrisma implements Pedido_de_compra_Repository {
                 pedido_de_compra_id
             },
             data:{
+                produtos:{
+                    disconnect:[{produto_id:produto.produto_id}]       
+                },
                 total_a_pagar:{
                     decrement:produto.preco
                 },

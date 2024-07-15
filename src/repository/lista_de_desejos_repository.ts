@@ -15,16 +15,14 @@ class Lista_de_desejos_Prisma implements Lista_de_desejos_Repository {
         return result;
     }
 
-    async adicionaProdutos(lista_de_desejos_id:string,produto: ProdutoData): Promise<Lista_de_desejos> {
+    async adicionaProdutos(lista_de_desejos_id:string,produto: Produto): Promise<Lista_de_desejos> {
         const result = await prisma.lista_de_desejos.update({
             where:{
                 lista_de_desejos_id: lista_de_desejos_id
             },
             data:{
                 produtos:{
-                    createMany:{
-                        data:[produto]
-                    }
+                    connect:{produto_id:produto.produto_id}
                 },
                 total_de_produtos: {
                     increment:1
@@ -44,9 +42,7 @@ class Lista_de_desejos_Prisma implements Lista_de_desejos_Repository {
             },
             data:{
                 produtos:{
-                    delete:{
-                       produto_id: produto.produto_id
-                    },
+                    disconnect:{produto_id:produto.produto_id}
                 },
                 total_de_produtos: {
                     decrement:1

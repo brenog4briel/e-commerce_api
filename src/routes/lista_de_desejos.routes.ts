@@ -1,7 +1,7 @@
 import { FastifyInstance } from "fastify";
 import { Lista_de_desejos_Usecase } from "../usecases/lista_de_desejos_usecase";
 import { authMiddleware } from "../middlewares/auth.middleware";
-import { Produto, ProdutoData } from "../interfaces/produto.interface";
+import { Produto } from "../interfaces/produto.interface";
 
 export async function Lista_de_desejosRoutes(fastify:FastifyInstance) {
 
@@ -23,7 +23,7 @@ export async function Lista_de_desejosRoutes(fastify:FastifyInstance) {
         }
     })
 
-    fastify.put<{Body: {lista_de_desejos_id:string, produto:ProdutoData}}>("/adiciona-produto",async(req,reply) => {
+    fastify.put<{Body: {lista_de_desejos_id:string, produto:Produto}}>("/adiciona-produto",async(req,reply) => {
         const {lista_de_desejos_id,produto} = req.body;
         console.log(req.body)
         try {

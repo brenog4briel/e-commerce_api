@@ -15,7 +15,7 @@ class Lista_de_desejos_Usecase {
         return data;
     }
 
-     async adicionaProduto(lista_de_desejos_id:string,produto: ProdutoData): Promise<Lista_de_desejos> {
+     async adicionaProduto(lista_de_desejos_id:string,produto: Produto): Promise<Lista_de_desejos> {
         const data = await this.lista_de_desejos_repository.adicionaProdutos(lista_de_desejos_id,produto);
         return data;
     }

@@ -1,6 +1,6 @@
 import { FastifyInstance } from "fastify";
 import { authMiddleware } from "../middlewares/auth.middleware";
-import { Produto, ProdutoData } from "../interfaces/produto.interface";
+import { Produto } from "../interfaces/produto.interface";
 import { Historico_de_compras_Usecase } from "../usecases/historico_de_compras";
 
 export async function Historico_de_comprasRoutes(fastify:FastifyInstance) {
@@ -23,7 +23,7 @@ export async function Historico_de_comprasRoutes(fastify:FastifyInstance) {
         }
     })
 
-    fastify.put<{Body: {historico_de_compras_id:string, produto:ProdutoData}}>("/adiciona-produto",async(req,reply) => {
+    fastify.put<{Body: {historico_de_compras_id:string, produto:Produto}}>("/adiciona-produto",async(req,reply) => {
         const {historico_de_compras_id,produto} = req.body;
         console.log(req.body)
         try {

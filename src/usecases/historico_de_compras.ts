@@ -1,4 +1,4 @@
-import { ProdutoData } from "../interfaces/produto.interface";
+import { Produto } from "../interfaces/produto.interface";
 import { Historico_de_compras_Prisma } from "../repository/historico_de_compras";
 import { Historico_de_compras } from "../interfaces/historico_de_compras";
 class Historico_de_compras_Usecase {
@@ -14,7 +14,7 @@ class Historico_de_compras_Usecase {
         return data;
     }
 
-     async adicionaProduto(historico_de_compras_id:string,produto: ProdutoData): Promise<Historico_de_compras> {
+     async adicionaProduto(historico_de_compras_id:string,produto: Produto): Promise<Historico_de_compras> {
         const data = await this.historico_de_compras_repository.adicionaProdutos(historico_de_compras_id,produto);
         return data;
     }
