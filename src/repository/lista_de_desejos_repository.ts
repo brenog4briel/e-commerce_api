@@ -22,7 +22,9 @@ class Lista_de_desejos_Prisma implements Lista_de_desejos_Repository {
             },
             data:{
                 produtos:{
-                    create:produto
+                    createMany:{
+                        data:[produto]
+                    }
                 },
                 total_de_produtos: {
                     increment:1
@@ -30,9 +32,6 @@ class Lista_de_desejos_Prisma implements Lista_de_desejos_Repository {
                 preco_acumulado:{
                     increment: produto.preco
                 }
-            },
-            include:{
-                produtos:true
             }
         })
         return result;
@@ -55,9 +54,6 @@ class Lista_de_desejos_Prisma implements Lista_de_desejos_Repository {
                 preco_acumulado: {
                     decrement: produto.preco
                 }
-            },
-            include:{
-                produtos:true
             }
         })
         return result || null;

@@ -23,7 +23,9 @@ class Historico_de_compras_Prisma implements Historico_de_compras_Repository {
             },
             data:{
                 produtos:{
-                    create:produto
+                    createMany:{
+                        data:[produto]
+                    }
                 },
                 total_de_aquisicoes:{
                     increment:1
@@ -31,9 +33,6 @@ class Historico_de_compras_Prisma implements Historico_de_compras_Repository {
                 preco_total_gasto:{
                     increment: produto.preco
                 }
-            },
-            include:{
-                produtos:true
             }
         })
         return result;
