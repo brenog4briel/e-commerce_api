@@ -46,13 +46,13 @@ export async function Pedido_de_compraRoutes(fastify:FastifyInstance) {
         }
     })
 
-    fastify.delete<{Body:{pedido_de_compra_id:string}}>("/remove-all",async(req,reply) => { 
-        const {pedido_de_compra_id} = req.body;
+    fastify.delete<{Params:{pedido_de_compra_id:string}}>("/remove-all",async(req,reply) => { 
+        const {pedido_de_compra_id} = req.params;
         try {
             const result = await pedido_de_compra.deletePedido(pedido_de_compra_id);
             return reply.send(result)
         } catch (error) {
-            throw new Error("Houve um erro ao limpar o pedido de compra")
+            throw new Error("Houve um erro ao apagar o pedido de compra")
 
         }
     })
