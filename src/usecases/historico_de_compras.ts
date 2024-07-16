@@ -14,7 +14,7 @@ class Historico_de_compras_Usecase {
         return data;
     }
 
-     async adicionaProduto(historico_de_compras_id:string,produto: Produto): Promise<Historico_de_compras> {
+     async adicionaProduto(historico_de_compras_id:string,produto: Produto[]): Promise<Historico_de_compras> {
         const data = await this.historico_de_compras_repository.adicionaProdutos(historico_de_compras_id,produto);
         return data;
     }

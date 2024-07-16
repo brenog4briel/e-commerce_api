@@ -16,20 +16,23 @@ class Historico_de_compras_Prisma implements Historico_de_compras_Repository {
         return result;
     }
 
-    async adicionaProdutos(historico_de_compras_id:string,produto: Produto): Promise<Historico_de_compras> {
+    async adicionaProdutos(historico_de_compras_id:string,produto: Produto[]): Promise<Historico_de_compras> {
+        let total = 0;
+        const precoTotal = produto.forEach((e) => total += e.preco)
+
         const result = await prisma.historico_de_compras.update({
             where:{
                 historico_de_compras_id: historico_de_compras_id
             },
             data:{
                 produtos:{
-                   connect:[{produto_id:produto.produto_id}]
+                   connect: produto
                 },
                 total_de_aquisicoes:{
-                    increment:1
+                    increment:produto.length
                 },
                 preco_total_gasto:{
-                    increment: produto.preco
+                    increment: total
                 }
             }
         })

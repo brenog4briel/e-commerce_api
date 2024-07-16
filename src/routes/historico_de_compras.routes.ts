@@ -23,7 +23,7 @@ export async function Historico_de_comprasRoutes(fastify:FastifyInstance) {
         }
     })
 
-    fastify.put<{Body: {historico_de_compras_id:string, produto:Produto}}>("/adiciona-produto",async(req,reply) => {
+    fastify.put<{Body: {historico_de_compras_id:string, produto:Produto[]}}>("/adiciona-produto",async(req,reply) => {
         const {historico_de_compras_id,produto} = req.body;
         console.log(req.body)
         try {
