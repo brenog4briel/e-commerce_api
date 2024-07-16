@@ -19,16 +19,6 @@ class Pedido_de_compra_RepositoryPrisma implements Pedido_de_compra_Repository {
     }
 
     async adicionaProdutos(pedido_de_compra_id:string,produto: Produto): Promise<Pedido_de_compra> {
-         const produtoData : ProdutoData = {
-            nome: produto.nome,
-            preco: produto.preco,
-            proprietario: produto.proprietario,
-            categoria:produto.categoria,
-            qtd_estoque: produto.qtd_estoque,
-            numero_vendas: produto.numero_vendas!,
-            imagem:produto.imagem,
-            usuario_id:produto.usuario_id!
-        }
         const result = await prisma.pedido_de_compra.update({
             where:{
                 pedido_de_compra_id: pedido_de_compra_id
@@ -60,7 +50,7 @@ class Pedido_de_compra_RepositoryPrisma implements Pedido_de_compra_Repository {
         return result
     }
 
-    async removeProdutos(pedido_de_compra_id: string, produto: Produto): Promise<Pedido_de_compra> {
+    async removeProdutos(pedido_de_compra_id: string, produto: Produto): Promise<void> {
         
         const result = await prisma.pedido_de_compra.update({
             where:{
@@ -75,7 +65,6 @@ class Pedido_de_compra_RepositoryPrisma implements Pedido_de_compra_Repository {
                 },
             }
         })
-        return result || null;
     }
 
     async getPedidoByUserId(usuario_id: string): Promise<Pedido_de_compra | null> {
@@ -88,6 +77,19 @@ class Pedido_de_compra_RepositoryPrisma implements Pedido_de_compra_Repository {
             }
         })
         return result || null
+    }
+
+    async removeAllProducts(pedido_de_compra_id:string): Promise<void> {
+        const result = await prisma.pedido_de_compra.update({
+            where:{
+                pedido_de_compra_id
+            },
+            data:{
+                produtos:{
+                    set:[]
+                },
+            }
+        })
     }
 
 }

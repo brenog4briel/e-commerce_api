@@ -44,6 +44,16 @@ export async function Lista_de_desejosRoutes(fastify:FastifyInstance) {
         }
     })
 
+    fastify.put<{Body: {lista_de_desejos_id:string}}>("/remove-all",async(req,reply) => {
+        const {lista_de_desejos_id} = req.body;
+        try {
+            const result = await lista_de_desejos_Usecase.removeAllProducts(lista_de_desejos_id);
+            return reply.send(result);
+        } catch (error) {
+            throw new Error("Houve um erro ao limpar a lista de desejos")
+        }
+    })
+
     fastify.get<{Params: {usuario_id:string}}>("/lista/:usuario_id",async(req,reply) => {
         const {usuario_id} = req.params;
         try {

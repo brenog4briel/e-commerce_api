@@ -1,7 +1,7 @@
 import fastify, { FastifyInstance } from "fastify";
 import { UsuarioRoutes } from "./routes/usuario.routes";
 import { ProdutoRoutes } from "./routes/produto.routes";
-import { Pedido_de_compraRoutes } from "./routes/pedido_de_compra_.routes";
+import { Pedido_de_compraRoutes } from "./routes/pedido_de_compra.routes";
 import 'dotenv/config'
 import cors from "@fastify/cors"
 import { UploadRoutes } from "./routes/upload.routes";

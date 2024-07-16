@@ -35,7 +35,7 @@ class Lista_de_desejos_Prisma implements Lista_de_desejos_Repository {
         return result;
     }
 
-    async removeProduto(lista_de_desejos_id: string, produto: Produto): Promise<Lista_de_desejos> {
+    async removeProduto(lista_de_desejos_id: string, produto: Produto): Promise<void> {
         const result = await prisma.lista_de_desejos.update({
             where:{
                 lista_de_desejos_id
@@ -52,7 +52,6 @@ class Lista_de_desejos_Prisma implements Lista_de_desejos_Repository {
                 }
             }
         })
-        return result || null;
     }
 
     async getListByUserId(usuario_id: string): Promise<Lista_de_desejos | null> {
@@ -65,6 +64,17 @@ class Lista_de_desejos_Prisma implements Lista_de_desejos_Repository {
             }
         })
         return result || null
+    }
+
+    async removeAllProducts(lista_de_desejos_id: string): Promise<void> {
+        const result = await prisma.lista_de_desejos.update({
+            where:{lista_de_desejos_id},
+            data:{
+                produtos:{
+                    set:[]
+                }
+            }
+        })
     }
 }
 

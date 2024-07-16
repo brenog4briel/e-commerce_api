@@ -21,8 +21,13 @@ class Pedido_de_compra_UseCase {
         return data;
     }
 
-    async removeProduto(pedido_de_compra_id:string,produto: Produto): Promise<Pedido_de_compra> {
+    async removeProduto(pedido_de_compra_id:string,produto: Produto): Promise<void> {
         const data = await this.pedido_de_compra_repository.removeProdutos(pedido_de_compra_id,produto);
+        return data;
+    }
+
+    async removeAllProducts(pedido_de_compra_id:string): Promise<void> {
+        const data = await this.pedido_de_compra_repository.removeAllProducts(pedido_de_compra_id);
         return data;
     }
 

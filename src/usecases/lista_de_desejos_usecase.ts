@@ -20,8 +20,13 @@ class Lista_de_desejos_Usecase {
         return data;
     }
 
-    async removeProduto(lista_de_desejos_id:string,produto:Produto) : Promise<Lista_de_desejos> {
+    async removeProduto(lista_de_desejos_id:string,produto:Produto) : Promise<void> {
         const data = await this.lista_de_desejos_repository.removeProduto(lista_de_desejos_id,produto);
+        return data;
+    }
+
+    async removeAllProducts(lista_de_desejos_id:string) : Promise<void> {
+        const data = await this.lista_de_desejos_repository.removeAllProducts(lista_de_desejos_id);
         return data;
     }
     

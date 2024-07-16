@@ -46,6 +46,17 @@ export async function Pedido_de_compraRoutes(fastify:FastifyInstance) {
         }
     })
 
+    fastify.put<{Body:{pedido_de_compra_id:string}}>("/remove-all",async(req,reply) => { 
+        const {pedido_de_compra_id} = req.body;
+        try {
+            const result = await pedido_de_compra.removeAllProducts(pedido_de_compra_id);
+            return reply.send(result)
+        } catch (error) {
+            throw new Error("Houve um erro ao limpar o pedido de compra")
+
+        }
+    })
+
     fastify.get<{Params:{usuario_id: string}}>("/pedido/:usuario_id",async(req,reply) => { 
         const {usuario_id} = req.params;
         try {
