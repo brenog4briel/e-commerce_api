@@ -88,6 +88,8 @@ class Pedido_de_compra_RepositoryPrisma implements Pedido_de_compra_Repository {
                 produtos:{
                     set:[]
                 },
+                total_a_pagar:0,
+                desconto:0
             }
         })
     }
