@@ -73,7 +73,8 @@ class Lista_de_desejos_Prisma implements Lista_de_desejos_Repository {
                 produtos:{
                     set:[]
                 },
-                total_de_produtos:0
+                total_de_produtos:0,
+                preco_acumulado:0
             }
         })
     }
