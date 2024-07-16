@@ -26,8 +26,8 @@ class Pedido_de_compra_UseCase {
         return data;
     }
 
-    async removeAllProducts(pedido_de_compra_id:string): Promise<void> {
-        const data = await this.pedido_de_compra_repository.removeAllProducts(pedido_de_compra_id);
+    async deletePedido(pedido_de_compra_id:string): Promise<void> {
+        const data = await this.pedido_de_compra_repository.deletePedido(pedido_de_compra_id);
         return data;
     }
 

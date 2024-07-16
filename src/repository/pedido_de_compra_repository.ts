@@ -79,17 +79,10 @@ class Pedido_de_compra_RepositoryPrisma implements Pedido_de_compra_Repository {
         return result || null
     }
 
-    async removeAllProducts(pedido_de_compra_id:string): Promise<void> {
-        const result = await prisma.pedido_de_compra.update({
+    async deletePedido(pedido_de_compra_id:string): Promise<void> {
+        const result = await prisma.pedido_de_compra.delete({
             where:{
                 pedido_de_compra_id
-            },
-            data:{
-                produtos:{
-                    set:[]
-                },
-                total_a_pagar:0,
-                desconto:0
             }
         })
     }
